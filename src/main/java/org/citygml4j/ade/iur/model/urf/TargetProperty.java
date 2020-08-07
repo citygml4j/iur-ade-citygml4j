@@ -1,10 +1,11 @@
 /*
- * energy-ade-citygml4j - Energy ADE module for citygml4j
- * https://github.com/citygml4j/energy-ade-citygml4j
+ * iur-ade-citygml4j - i-Urban Revitalization ADE module for citygml4j
+ * https://github.com/citygml4j/iur-ade-citygml4j
  *
- * energy-ade-citygml4j is part of the citygml4j project
+ * iur-ade-citygml4j is part of the citygml4j project
  *
- * Copyright 2013-2019 Claus Nagel <claus.nagel@gmail.com>
+ * Copyright 2019-2020 virtualcitySYSTEMS GmbH
+ * https://www.virtualcitysystems.de/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
