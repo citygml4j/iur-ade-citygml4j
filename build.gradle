@@ -9,7 +9,7 @@ plugins {
 
 group 'org.citygml4j.ade'
 version '1.0.0'
-description 'CityGML i-UR ADE module for citygml4j'
+description 'i-Urban Revitalization ADE module for citygml4j'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
