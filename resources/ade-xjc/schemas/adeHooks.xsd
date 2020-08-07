@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/ade-hooks/1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/ade-hooks/1.3"
+  xmlns:urg="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urg/1.3"
+  xmlns:urf="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urf/1.3" elementFormDefault="qualified"
+  attributeFormDefault="unqualified" version="1.2.0">
+  <xs:import namespace="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urg/1.3" schemaLocation="statisticalGrid.xsd"/>
+  <xs:import namespace="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urf/1.3" schemaLocation="urbanFunction.xsd"/>
+
+  <!-- dummy ade hooks -->
+  <xs:element name="ADE_UrbanFunction" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfUrbanFunction"/>
+  <xs:element name="ADE_Administration" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfAdministration"/>
+  <xs:element name="ADE_Zone" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfZone"/>
+  <xs:element name="ADE_LandUsePlan" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfLandUsePlan"/>
+  <xs:element name="ADE_UrbanPlan" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfUrbanPlan"/>
+  <xs:element name="ADE_Agreement" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfAgreement"/>
+  <xs:element name="ADE_Regulation" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfRegulation"/>
+  <xs:element name="ADE_AreaClassification" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfAreaClassification"/>
+  <xs:element name="ADE_DistrictsAndZones" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfDistrictsAndZones"/>
+  <xs:element name="ADE_DevelopmentProject" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfDevelopmentProject"/>
+  <xs:element name="ADE_CensusBlock" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfCensusBlock"/>
+  <xs:element name="ADE_DisasterDamage" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfDisasterDamage"/>
+  <xs:element name="ADE_Pollution" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfPollution"/>
+  <xs:element name="ADE_DisasterPreventionBase" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfDisasterPreventionBase"/>
+  <xs:element name="ADE_Recreations" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfRecreations"/>
+  <xs:element name="ADE_HubCity" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfHubCity"/>
+  <xs:element name="ADE_LandUseDiversion" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfLandUseDiversion"/>
+  <xs:element name="ADE_Urbanization" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfUrbanization"/>
+  <xs:element name="ADE_PublicTransit" type="xs:anyType" abstract="true" substitutionGroup="urf:_GenericApplicationPropertyOfPublicTransit"/>
+  <xs:element name="ADE_StatisticalGrid" type="xs:anyType" abstract="true" substitutionGroup="urg:_GenericApplicationPropertyOfStatisticalGrid"/>
+  <xs:element name="ADE_Population" type="xs:anyType" abstract="true" substitutionGroup="urg:_GenericApplicationPropertyOfPopulation"/>
+  <xs:element name="ADE_PublicTransportationAccessibility" type="xs:anyType" abstract="true" substitutionGroup="urg:_GenericApplicationPropertyOfPublicTransportationAccessibility"/>
+  <xs:element name="ADE_LandPrice" type="xs:anyType" abstract="true" substitutionGroup="urg:_GenericApplicationPropertyOfLandPrice"/>
+  <xs:element name="ADE_GridLandUseDiversion" type="xs:anyType" abstract="true" substitutionGroup="urg:_GenericApplicationPropertyOfLandUseDiversion"/>
+  <xs:element name="ADE_Households" type="xs:anyType" abstract="true" substitutionGroup="urg:_GenericApplicationPropertyOfHouseholds"/>
+  <xs:element name="ADE_OfficesAndEmployees" type="xs:anyType" abstract="true" substitutionGroup="urg:_GenericApplicationPropertyOfOfficesAndEmployees"/>
+</xs:schema>

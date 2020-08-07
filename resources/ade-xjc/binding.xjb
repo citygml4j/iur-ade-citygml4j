@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings version="2.1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:namespace="http://jaxb2-commons.dev.java.net/namespace-prefix">
+  
+  <jaxb:bindings schemaLocation="schemas/urbanObject.xsd" node="/xs:schema">
+    <jaxb:schemaBindings>
+      <jaxb:package name="jp.go.kantei.iur._1_3.uro"/>
+    </jaxb:schemaBindings>
+    <jaxb:bindings>
+      <namespace:prefix name="uro"/>
+    </jaxb:bindings>
+    <jaxb:bindings node="xs:element[@name='buildingDetails']">
+      <jaxb:factoryMethod name="BuildingDetailsProperty"/>
+    </jaxb:bindings>
+    <jaxb:bindings node="xs:element[@name='largeCustomerFacilities']">
+      <jaxb:factoryMethod name="LargeCustomerFacilitiesProperty"/>
+    </jaxb:bindings>
+    <jaxb:bindings node="xs:element[@name='trafficVolume']">
+      <jaxb:factoryMethod name="TrafficVolumeProperty"/>
+    </jaxb:bindings>
+  </jaxb:bindings>
+  
+  <jaxb:bindings schemaLocation="schemas/urbanFunction.xsd" node="/xs:schema">
+    <jaxb:schemaBindings>
+      <jaxb:package name="jp.go.kantei.iur._1_3.urf"/>
+    </jaxb:schemaBindings>
+    <jaxb:bindings>
+      <namespace:prefix name="urf"/>
+    </jaxb:bindings>
+    <jaxb:bindings node="xs:complexType[@name='UrbanFunctionType']">
+      <jaxb:bindings node=".//xs:element[@name='location']">
+        <jaxb:property name="pointLocation"/>
+      </jaxb:bindings>
+    </jaxb:bindings>
+  </jaxb:bindings>
+  
+  <jaxb:bindings schemaLocation="schemas/statisticalGrid.xsd" node="/xs:schema">
+    <jaxb:schemaBindings>
+      <jaxb:package name="jp.go.kantei.iur._1_3.urg"/>
+    </jaxb:schemaBindings>
+    <jaxb:bindings>
+      <namespace:prefix name="urg"/>
+    </jaxb:bindings>
+  </jaxb:bindings>
+  
+</jaxb:bindings>

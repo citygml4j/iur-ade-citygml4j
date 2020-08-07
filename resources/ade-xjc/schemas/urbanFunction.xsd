@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:urf="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urf/1.3" xmlns:core="http://www.opengis.net/citygml/2.0" xmlns:grp="http://www.opengis.net/citygml/cityobjectgroup/2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:gml="http://www.opengis.net/gml" targetNamespace="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urf/1.3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3.0">
+	<xs:annotation>
+		<xs:documentation>XML Schema for Urban Function module</xs:documentation>
+	</xs:annotation>
+  <xs:import namespace="http://www.opengis.net/gml" schemaLocation="../../schemas/gml/3.1.1/base/gml.xsd"/>
+  <xs:import namespace="http://www.opengis.net/citygml/2.0" schemaLocation="../../schemas/citygml/2.0.0/cityGMLBase.xsd"/>
+  <xs:import namespace="http://www.opengis.net/citygml/cityobjectgroup/2.0" schemaLocation="../../schemas/citygml/2.0.0/cityObjectGroup.xsd"/>
+	<!-- ===================================================================== -->
+	<!-- ====================== CityGML UrbanFunction module ================== -->
+	<!-- ===================================================================== -->
+	<xs:complexType name="UrbanFunctionType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>The root type for urban function. As subclass of _CityObject, an
+				_UrbanFunction inherits all attributes and relations, in particular description, an
+				id, names and description from _AbstractFeature. </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="core:AbstractCityObjectType">
+				<xs:sequence>
+					<xs:element name="class" type="gml:CodeType" minOccurs="0"/>
+					<xs:element name="function" type="gml:CodeType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="enactmentDate" type="xs:date" minOccurs="0"/>
+					<xs:element name="enactmentFiscalYear" type="xs:gYear" minOccurs="0"/>
+					<xs:element name="expirationDate" type="xs:date" minOccurs="0"/>
+					<xs:element name="expirationFiscalYear" type="xs:gYear" minOccurs="0"/>
+					<xs:element name="legalGrounds" type="urf:LegalGroundsPropertyType" minOccurs="0"/>
+					<xs:element name="custodian" type="xs:string" minOccurs="0"/>
+					<xs:element name="nominalArea" type="gml:MeasureType" minOccurs="0"/>
+					<xs:element name="abstract" type="xs:string" minOccurs="0"/>
+					<xs:element name="validity" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="urbanPlanType" type="gml:CodeType" minOccurs="0"/>
+					<xs:element name="areaClassificationType" type="gml:CodeType" minOccurs="0"/>
+					<xs:element name="prefecture" type="gml:CodeType" minOccurs="0"/>
+					<xs:element name="city" type="gml:CodeType" minOccurs="0"/>
+					<xs:element name="reference" type="xs:string" minOccurs="0"/>
+					<xs:element name="note" type="xs:string" minOccurs="0"/>
+					<xs:element name="surveyYear" type="xs:gYear" minOccurs="0"/>
+					<xs:element name="area" type="gml:MultiSurfacePropertyType" minOccurs="0"/>
+					<xs:element name="boundary" type="gml:MultiCurvePropertyType" minOccurs="0"/>
+					<xs:element name="location" type="gml:MultiPointPropertyType" minOccurs="0"/>
+					<xs:element name="target" type="urf:TargetPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfUrbanFunction" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_UrbanFunction" type="urf:UrbanFunctionType" abstract="true" substitutionGroup="core:_CityObject"/>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfUrbanFunction" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:element name="LegalGrounds" type="urf:LegalGroundsType"/>
+	<xs:complexType name="LegalGroundsType">
+		<xs:sequence>
+			<xs:element name="nameOfRegulation" type="gml:CodeType" minOccurs="0"/>
+			<xs:element name="articlesOfRegulation" type="gml:CodeType" minOccurs="0"/>
+			<xs:element name="date" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:complexType name="LegalGroundsPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:LegalGrounds"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:complexType name="TargetPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="core:_CityObject"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:complexType name="AdministrationType">
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element ref="urf:_GenericApplicationPropertyOfAdministration" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="Administration" type="urf:AdministrationType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfAdministration" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="ZoneType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>zoning district</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element name="finalPublicationDate" type="xs:date" minOccurs="0"/>
+					<xs:element name="areaApplied" type="xs:string" minOccurs="0"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfZone" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_Zone" type="urf:ZoneType" abstract="true" substitutionGroup="urf:_UrbanFunction"/>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfZone" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="LandUsePlanType">
+		<xs:complexContent>
+			<xs:extension base="urf:ZoneType">
+				<xs:sequence>
+					<xs:element ref="urf:_GenericApplicationPropertyOfLandUsePlan" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="LandUsePlan" type="urf:LandUsePlanType" substitutionGroup="urf:_Zone">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="LandUsePlanPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:LandUsePlan"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfLandUsePlan" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="UrbanPlanType">
+		<xs:annotation>
+			<xs:documentation>Urban planning area</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="urf:ZoneType">
+				<xs:sequence>
+					<xs:element ref="urf:_GenericApplicationPropertyOfUrbanPlan" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="UrbanPlan" type="urf:UrbanPlanType" substitutionGroup="urf:_Zone">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UrbanPlanPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:UrbanPlan"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfUrbanPlan" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="AgreementType">
+		<xs:annotation>
+			<xs:documentation>Area specified area by the agreement between the parties agreed upon
+				and negotiated in order to avoid conflict, competition, etc.,</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="urf:ZoneType">
+				<xs:sequence>
+					<xs:element ref="urf:_GenericApplicationPropertyOfAgreement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="Agreement" type="urf:AgreementType" substitutionGroup="urf:_Zone">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AgreementPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:Agreement"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfAgreement" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="RegulationType">
+		<xs:complexContent>
+			<xs:extension base="urf:ZoneType">
+				<xs:sequence>
+					<xs:element ref="urf:_GenericApplicationPropertyOfRegulation" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="Regulation" type="urf:RegulationType" substitutionGroup="urf:_Zone">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RegulationPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:Regulation"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfRegulation" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="AreaClassificationType">
+		<xs:complexContent>
+			<xs:extension base="urf:ZoneType">
+				<xs:sequence>
+					<xs:element ref="urf:_GenericApplicationPropertyOfAreaClassification" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="AreaClassification" type="urf:AreaClassificationType" substitutionGroup="urf:_Zone">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AreaClassificationPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:AreaClassification"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfAreaClassification" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="DistrictsAndZonesType">
+		<xs:complexContent>
+			<xs:extension base="urf:ZoneType">
+				<xs:sequence>
+					<xs:element ref="urf:_GenericApplicationPropertyOfDistrictsAndZones" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="DistrictsAndZones" type="urf:DistrictsAndZonesType" substitutionGroup="urf:_Zone">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DistrictsAndZonesPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:DistrictsAndZones"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfDistrictsAndZones" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="DevelopmentProjectType">
+		<xs:complexContent>
+			<xs:extension base="urf:ZoneType">
+				<xs:sequence>
+					<xs:element name="status" type="gml:CodeType" minOccurs="0"/>
+					<xs:element name="mainPurpose" type="gml:CodeType" minOccurs="0"/>
+					<xs:element name="benefitArea" type="gml:MeasureType" minOccurs="0"/>
+					<xs:element name="benefitPeriod" type="xs:string" minOccurs="0"/>
+					<xs:element name="cost" type="xs:integer" minOccurs="0"/>
+					<xs:element name="plannedArea" type="gml:MeasureType" minOccurs="0"/>
+					<xs:element name="ongoingArea" type="gml:MeasureType" minOccurs="0"/>
+					<xs:element name="completedArea" type="gml:MeasureType" minOccurs="0"/>
+					<xs:element name="dateOfDecision" type="xs:date" minOccurs="0"/>
+					<xs:element name="dateOfDesignationForTemporaryReplotting" type="xs:date" minOccurs="0"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfDevelopmentProject" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="DevelopmentProject" type="urf:DevelopmentProjectType" substitutionGroup="urf:_Zone">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DevelopmentProjectPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:DevelopmentProject"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfDevelopmentProject" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="CensusBlockType">
+		<xs:annotation>
+			<xs:documentation>Block for census survey</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element name="daytimePopulation" type="xs:integer" minOccurs="0"/>
+					<xs:element name="daytimePopulationDensity" type="xs:double" minOccurs="0"/>
+					<xs:element name="numberOfOrdinaryHouseholds" type="xs:integer" minOccurs="0"/>
+					<xs:element name="numberOfHouseholdsByOwnership" type="urf:NumberOfHouseholdsPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="numberOfMainHouseholds" type="xs:integer" minOccurs="0"/>
+					<xs:element name="numberOfHouseholdsByStruture" type="urf:NumberOfHouseholdsPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfCensusBlock" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="CensusBlock" type="urf:CensusBlockType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CensusBlockPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:CensusBlock"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfCensusBlock" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:element name="NumberOfHouseholds" type="urf:NumberOfHouseholdsType"/>
+	<xs:complexType name="NumberOfHouseholdsType">
+		<xs:sequence>
+			<xs:element name="class" type="gml:CodeType"/>
+			<xs:element name="number" type="xs:integer"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NumberOfHouseholdsPropertyType">
+		<xs:sequence>
+			<xs:element ref="urf:NumberOfHouseholds"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:complexType name="DisasterDamageType">
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element name="damagedArea" type="gml:MeasureType" minOccurs="0"/>
+					<xs:element name="numberOfDamagedHouses" type="xs:nonNegativeInteger" minOccurs="0"/>
+					<xs:element name="numberOfHousesFloodedAboveFloorLevel" type="xs:nonNegativeInteger" minOccurs="0"/>
+					<xs:element name="numberOfHousesFloodedBelowFloorLevel" type="xs:nonNegativeInteger" minOccurs="0"/>
+					<xs:element name="maximumRainfallPerHour" type="xs:nonNegativeInteger" minOccurs="0"/>
+					<xs:element name="totalRainfall" type="xs:nonNegativeInteger" minOccurs="0"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfDisasterDamage" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="DisasterDamage" type="urf:DisasterDamageType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DisasterDamagePropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:DisasterDamage"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfDisasterDamage" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="PollutionType">
+		<xs:annotation>
+			<xs:documentation>Source of pollution</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element name="damagedArea" type="gml:MeasureType" minOccurs="0"/>
+					<xs:element name="cause" type="xs:string" minOccurs="0"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfPollution" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="Pollution" type="urf:PollutionType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PollutionPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:Pollution"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfPollution" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="DisasterPreventionBaseType">
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element name="capacity" type="xs:integer" minOccurs="0"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfDisasterPreventionBase" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="DisasterPreventionBase" type="urf:DisasterPreventionBaseType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DisasterPreventionBasePropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:DisasterPreventionBase"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfDisasterPreventionBase" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="RecreationsType">
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element name="capacity" type="xs:integer" minOccurs="0"/>
+					<xs:element name="numberOfUsers" type="xs:integer" minOccurs="0"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfRecreations" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="Recreations" type="urf:RecreationsType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RecreationsPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:Recreations"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfRecreations" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="HubCityType">
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element ref="urf:_GenericApplicationPropertyOfHubCity" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="HubCity" type="urf:HubCityType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="HubCityPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:HubCity"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfHubCity" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="LandUseDiversionType">
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element ref="urf:_GenericApplicationPropertyOfLandUseDiversion" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="LandUseDiversion" type="urf:LandUseDiversionType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="LandUseDiversionPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:LandUseDiversion"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfLandUseDiversion" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+	<xs:complexType name="UrbanizationType">
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element name="period" type="xs:string" minOccurs="0"/>
+					<xs:element name="resources" type="xs:string" minOccurs="0"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfUrbanization" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="Urbanization" type="urf:UrbanizationType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UrbanizationPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:Urbanization"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfUrbanization" type="xs:anyType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+  <!-- ===================================================================== -->
+	<xs:element name="PublicTransit" type="urf:PublicTransitType" substitutionGroup="urf:_UrbanFunction">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PublicTransitType">
+		<xs:annotation>
+			<xs:documentation>The root type for public transit.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="urf:UrbanFunctionType">
+				<xs:sequence>
+					<xs:element name="routeName" type="xs:string" minOccurs="0"/>
+					<xs:element name="sectionName" type="xs:string" minOccurs="0"/>
+					<xs:element name="companyName" type="xs:string" minOccurs="0"/>
+					<xs:element name="frequencyOfService" type="xs:integer" minOccurs="0"/>
+					<xs:element name="numberOfCustomers" type="xs:double" minOccurs="0"/>
+					<xs:element ref="urf:_GenericApplicationPropertyOfPublicTransit" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PublicTransitPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urf:PublicTransit"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="_GenericApplicationPropertyOfPublicTransit" abstract="true">
+		<xs:annotation>
+			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:appinfo>
+				<taggedValue tag="ignore">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<!-- ===================================================================== -->
+</xs:schema>

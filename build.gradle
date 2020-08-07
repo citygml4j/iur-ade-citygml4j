@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+}
+
+group 'org.citygml4j.ade'
+version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    sourceSets {
+        main.java.srcDir 'src-gen/main/java'
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    api 'org.citygml4j:citygml4j:2.11.0'
+}

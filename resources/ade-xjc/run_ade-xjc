@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+###########################################################
+##
+##  UN*X start script for converting the UrbanPlanningADE
+##
+###########################################################
+
+OUTPUT="src-gen"
+BINDING="binding.xjb"
+SCHEMA="UrbanRevitalizationADE.xsd"
+PLUGINS="-Xnamespace-prefix"
+
+exec ../bin/ade-xjc $PLUGINS -clean -output $OUTPUT -binding $BINDING $SCHEMA
