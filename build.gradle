@@ -8,7 +8,7 @@ plugins {
 }
 
 group 'org.citygml4j.ade'
-version '1.0-test'
+version '1.0'
 description 'CityGML i-UR ADE module for citygml4j'
 
 java {
