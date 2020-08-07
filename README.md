@@ -20,7 +20,7 @@ program. Be careful to register the `ADEContext` before creating a `CityGMLBuild
 CityGMLContext context = CityGMLContext.getInstance();
 
 // register i-UR module
-context.registerADEContext(new IURADEContext());
+context.registerADEContext(new UrbanRevitalizationADEContext());
 
 CityGMLBuilder builder = context.createCityGMLBuilder();
 ...
