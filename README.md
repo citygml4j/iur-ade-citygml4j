@@ -1,5 +1,4 @@
-i-UR ADE module for citygml4j
-=============================
+# i-UR ADE module for citygml4j
 
 This is a citygml4j module for the **i-Urban Revitalization (i-UR)** Application Domain Extension for CityGML.
 The "i-UR" is an information infrastructure for urban revitalization and planning.
