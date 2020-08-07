@@ -32,6 +32,39 @@ Once loaded, citygml4j will automatically (de)serialize i-UR ADE content from Ci
 defined in the package `vcs.citygml4j.ade.iur.model`, which extend the predefined citygml4j model classes. Simply use
 these classes to build your i-UR specific application logic.
 
+## Latest release
+The latest stable release of iur-ade-citygml4j is 1.0.0.
+
+Download the iur-ade-citygml4j 1.0.0 release binaries
+[here](https://github.com/citygml4j/iur-ade-citygml4j/releases/download/v1.0.0/iur-ade-citygml4j-1.0.0.zip).
+Previous releases are available from the [releases section](https://github.com/citygml4j/iur-ade-citygml4j/releases).
+
+## Maven artifact
+iur-ade-citygml4j is also available as [Maven](http://maven.apache.org/) artifact from the
+[Maven Central Repository](https://search.maven.org/search?q=iur-ade-citygml4j) and from
+[JCenter](https://bintray.com/bintray/jcenter). To add iur-ade-citygml4j to your project with Maven, add the following
+code to your `pom.xml`. You may need to adapt the iur-ade-citygml4j version number.
+
+```xml
+<dependency>
+  <groupId>org.citygml4j</groupId>
+  <artifactId>iur-ade-citygml4j</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+Here is how you use iur-ade-citygml4j with your Gradle project:
+
+```gradle
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'org.citygml4j:iur-ade-citygml4j:1.0.0'
+}
+```
+
 ## Building from source
 The i-UR ADE module uses [Gradle](https://gradle.org/) as build system. To build the module from source, clone the
 repository to your local machine and run the following command from the root of the repository.
