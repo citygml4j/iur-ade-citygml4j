@@ -1,14 +1,22 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
     id 'java-library'
+    id 'distribution'
+    id 'maven-publish'
+    id 'com.jfrog.bintray' version '1.8.5'
 }
 
 group 'org.citygml4j.ade'
-version '1.0-SNAPSHOT'
+version '1.0-test'
+description 'CityGML i-UR ADE module for citygml4j'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     sourceSets {
         main.java.srcDir 'src-gen/main/java'
+        withJavadocJar()
+        withSourcesJar()
     }
 }
 
@@ -18,4 +26,111 @@ repositories {
 
 dependencies {
     api 'org.citygml4j:citygml4j:2.11.0'
+}
+
+javadoc {
+    options {
+        overview "$buildDir/tmp/javadoc/overview.html"
+        header "$project.name $project.version"
+        bottom """
+            <a target="_blank" href="https://github.com/citygml4j/iur-ade-citygml4j/issues">Report a bug or suggest an enhancement</a><br />
+            ${project.name} is open source and licensed under the <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a><br />
+            Official website and more information at: <a target="_blank" href="https://github.com/citygml4j">https://github.com/citygml4j</a><br />
+            """.replaceAll("[\r|\n]+", "")
+        addStringOption('doctitle', project.name + ' - ' + project.description)
+        addStringOption('Xdoclint:none', '-quiet')
+    }
+
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+
+    doFirst {
+        copy {
+            from 'resources/javadoc/overview.html'
+            into "$buildDir/tmp/javadoc"
+            filter(ReplaceTokens, tokens: [
+                    name: project.name,
+                    version: project.version
+            ])
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Automatic-Module-Name': project.group
+        )
+    }
+    into('META-INF') {
+        from 'LICENSE'
+    }
+}
+
+distributions.main.contents {
+    from 'README.md'
+    into('lib') {
+        from jar
+    }
+    into('javadoc') {
+        from javadoc
+    }
+    into('license') {
+        from 'LICENSE'
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = project.name
+                description = project.description
+                url = 'https://github.com/citygml4j'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution = 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'clausnagel'
+                        name = 'Claus Nagel'
+                        email = 'claus.nagel@gmail.com'
+                        roles = ['architect', 'developer']
+                        timezone = '+1'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/citygml4j/iur-ade-citygml4j'
+                    connection = 'scm:git:https://github.com/citygml4j/iur-ade-citygml4j.git'
+                }
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+
+    publications = ['mavenJava']
+    pkg {
+        repo = 'maven'
+        name = project.name
+        desc = project.description
+        websiteUrl = 'https://github.com/citygml4j'
+        vcsUrl = 'https://github.com/citygml4j/iur-ade-citygml4j.git'
+        issueTrackerUrl = 'https://github.com/citygml4j/iur-ade-citygml4j/issues'
+        labels = ['citygml', 'java', 'ade', 'iur', 'urban', 'plannung', 'revitalization', 'citygml4j']
+        licenses = ['Apache-2.0']
+        version {
+            name = project.version
+        }
+    }
 }
