@@ -7,5 +7,5 @@ This is the first release of the **i-Urban Revitalization (i-UR)** ADE module fo
 for parsing and writing i-UR ADE enriched CityGML datasets to citygml4j. The "i-UR" is an information infrastructure
 for urban revitalization and planning.
 
-* This release supports **i-UR version 1.3**.
+* This release supports **version 1.3 of the i-UR ADE**.
 * Built against **version 2.11 of citygml4j**.
