@@ -53,7 +53,7 @@ public class UrbanObjectModule extends ADEModule {
     }
 
     public String getModelPackageName() {
-        return "vcs.citygml4j.ade.iur.model.uro";
+        return "org.citygml4j.ade.iur.model.uro";
     }
 
     @Override

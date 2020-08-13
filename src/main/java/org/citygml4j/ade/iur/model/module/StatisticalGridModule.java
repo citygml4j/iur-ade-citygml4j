@@ -69,7 +69,7 @@ public class StatisticalGridModule extends ADEModule {
     }
 
     public String getModelPackageName() {
-        return "vcs.citygml4j.ade.iur.model.urg";
+        return "org.citygml4j.ade.iur.model.urg";
     }
 
     @Override

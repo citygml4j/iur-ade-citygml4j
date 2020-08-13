@@ -91,7 +91,7 @@ public class UrbanFunctionModule extends ADEModule {
     }
 
     public String getModelPackageName() {
-        return "vcs.citygml4j.ade.iur.model.urf";
+        return "org.citygml4j.ade.iur.model.urf";
     }
 
     @Override
