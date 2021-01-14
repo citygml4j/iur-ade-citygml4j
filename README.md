@@ -28,7 +28,7 @@ CityGMLBuilder builder = context.createCityGMLBuilder();
 The i-UR ADE module can also be loaded dynamically, for instance, using the Java Service Provider interface.
 
 Once loaded, citygml4j will automatically (de)serialize i-UR ADE content from CityGML datasets into the model classes
-defined in the package `vcs.citygml4j.ade.iur.model`, which extend the predefined citygml4j model classes. Simply use
+defined in the package `org.citygml4j.ade.iur.model`, which extend the predefined citygml4j model classes. Simply use
 these classes to build your i-UR specific application logic.
 
 ## Latest release
@@ -60,7 +60,7 @@ repositories {
 }
 
 dependencies {
-  compile 'org.citygml4j:iur-ade-citygml4j:1.0.0'
+  implementation 'org.citygml4j:iur-ade-citygml4j:1.0.0'
 }
 ```
 
