@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:urg="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urg/1.3" xmlns:core="http://www.opengis.net/citygml/2.0" xmlns:grp="http://www.opengis.net/citygml/cityobjectgroup/2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" targetNamespace="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urg/1.3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3.0">
+<xs:schema xmlns:urg="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urg/1.4" xmlns:core="http://www.opengis.net/citygml/2.0" xmlns:grp="http://www.opengis.net/citygml/cityobjectgroup/2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" targetNamespace="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urg/1.4" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
 	<xs:annotation>
 		<xs:documentation>XML Schema for Statistical Grid module</xs:documentation>
 	</xs:annotation>
 	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="../../schemas/gml/3.1.1/base/gml.xsd"/>
 	<xs:import namespace="http://www.opengis.net/citygml/2.0" schemaLocation="../../schemas/citygml/2.0.0/cityGMLBase.xsd"/>
-  <xs:import namespace="http://www.opengis.net/citygml/cityobjectgroup/2.0" schemaLocation="../../schemas/citygml/2.0.0/cityObjectGroup.xsd"/>
+	<xs:import namespace="http://www.opengis.net/citygml/cityobjectgroup/2.0" schemaLocation="../../schemas/citygml/2.0.0/cityObjectGroup.xsd"/>
 	<!-- ===================================================================== -->
 	<!-- =====================　CityGML StatisticalGrid module =============== -->
 	<!-- ===================================================================== -->
 	<xs:complexType name="StatisticalGridType" abstract="true">
-		<xs:annotation>
-			<xs:documentation>The root type for statistical grid. As subclass of _CityObject, an
-				_StatisticalGrid inherits all attributes and relations, in particular a description,
-				an id and names. </xs:documentation>
-		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="core:AbstractCityObjectType">
 				<xs:sequence>
@@ -25,24 +20,19 @@
 					<xs:element name="prefecture" type="gml:CodeType" minOccurs="0"/>
 					<xs:element name="city" type="gml:CodeType" minOccurs="0"/>
 					<xs:element name="surveyYear" type="xs:gYear" minOccurs="0"/>
-					<xs:element name="lod-1MultiSurfaceGeometry" type="gml:MultiSurfacePropertyType" minOccurs="0"/>
-					<xs:element name="lod-2MultiSurfaceGeometry" type="gml:MultiSurfacePropertyType" minOccurs="0"/>
-					<xs:element ref="urg:_GenericApplicationPropertyOfStatisticalGrid" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="lod-1MultiSurface" type="gml:MultiSurfacePropertyType" minOccurs="0"/>
+					<xs:element name="lod-2MultiSurface" type="gml:MultiSurfacePropertyType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!-- ===================================================================== -->
 	<xs:element name="_StatisticalGrid" type="urg:StatisticalGridType" abstract="true" substitutionGroup="core:_CityObject"/>
-	<!-- ===================================================================== -->
-	<xs:element name="_GenericApplicationPropertyOfStatisticalGrid" type="xs:anyType" abstract="true">
-		<xs:annotation>
-			<xs:documentation>This element is reserved for future use.</xs:documentation>
-			<xs:appinfo>
-				<taggedValue tag="ignore">true</taggedValue>
-			</xs:appinfo>
-		</xs:annotation>
-	</xs:element>
+	<xs:complexType name="StatisticalGridPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urg:_StatisticalGrid"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
 	<!-- ===================================================================== -->
 	<xs:complexType name="PopulationType">
 		<xs:annotation>
@@ -64,12 +54,10 @@
 					<xs:element name="malePopulation" type="xs:integer" minOccurs="0"/>
 					<xs:element name="femalePopulation" type="xs:integer" minOccurs="0"/>
 					<xs:element name="populationByAgeAndSex" type="urg:PopulationByAgeAndSexPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element ref="urg:_GenericApplicationPropertyOfPopulation" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!-- ===================================================================== -->
 	<xs:element name="Population" type="urg:PopulationType" substitutionGroup="urg:_StatisticalGrid">
 		<xs:annotation>
 			<xs:appinfo>
@@ -84,20 +72,10 @@
 		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
 	</xs:complexType>
 	<!-- ===================================================================== -->
-	<xs:element name="_GenericApplicationPropertyOfPopulation" type="xs:anyType" abstract="true">
-		<xs:annotation>
-			<xs:documentation>This element is reserved for future use.</xs:documentation>
-			<xs:appinfo>
-				<taggedValue tag="ignore">true</taggedValue>
-			</xs:appinfo>
-		</xs:annotation>
-	</xs:element>
-	<!-- ===================================================================== -->
 	<xs:element name="PopulationByAgeAndSex" type="urg:PopulationByAgeAndSexType"/>
 	<xs:complexType name="PopulationByAgeAndSexType">
 		<xs:sequence>
-			<xs:element name="age" type="gml:CodeType" minOccurs="0"/>
-			<xs:element name="sex" type="gml:CodeType" minOccurs="0"/>
+			<xs:element name="ageAndSex" type="gml:CodeType"/>
 			<xs:element name="number" type="xs:integer" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -107,43 +85,31 @@
 		</xs:sequence>
 	</xs:complexType>
 	<!-- ===================================================================== -->
-	<xs:complexType name="PublicTransportationAccessibilityType">
+	<xs:complexType name="PublicTransitAccessibilityType">
 		<xs:annotation>
-			<xs:documentation>grid cell to describe areas where the public transportation service is
-				available</xs:documentation>
+			<xs:documentation>grid cell to describe areas where the public transportation service is available</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="urg:StatisticalGridType">
 				<xs:sequence>
 					<xs:element name="availability" type="xs:boolean" minOccurs="0"/>
-					<xs:element ref="urg:_GenericApplicationPropertyOfPublicTransportationAccessibility" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!-- ===================================================================== -->
-	<xs:element name="PublicTransportationAccessibility" type="urg:PublicTransportationAccessibilityType" substitutionGroup="urg:_StatisticalGrid">
+	<xs:element name="PublicTransitAccessibility" type="urg:PublicTransitAccessibilityType" substitutionGroup="urg:_StatisticalGrid">
 		<xs:annotation>
 			<xs:appinfo>
 				<taggedValue tag="topLevel">true</taggedValue>
 			</xs:appinfo>
 		</xs:annotation>
 	</xs:element>
-	<xs:complexType name="PublicTransportationAccessibilityPropertyType">
+	<xs:complexType name="PublicTransitAccessibilityPropertyType">
 		<xs:sequence minOccurs="0">
-			<xs:element ref="urg:PublicTransportationAccessibility"/>
+			<xs:element ref="urg:PublicTransitAccessibility"/>
 		</xs:sequence>
 		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
 	</xs:complexType>
-	<!-- ===================================================================== -->
-	<xs:element name="_GenericApplicationPropertyOfPublicTransportationAccessibility" type="xs:anyType" abstract="true">
-		<xs:annotation>
-			<xs:documentation>This element is reserved for future use.</xs:documentation>
-			<xs:appinfo>
-				<taggedValue tag="ignore">true</taggedValue>
-			</xs:appinfo>
-		</xs:annotation>
-	</xs:element>
 	<!-- ===================================================================== -->
 	<xs:complexType name="LandPriceType">
 		<xs:annotation>
@@ -153,12 +119,11 @@
 			<xs:extension base="urg:StatisticalGridType">
 				<xs:sequence>
 					<xs:element name="landPrice" type="urg:LandPricePerLandUsePropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element ref="urg:_GenericApplicationPropertyOfLandPrice" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="currencyUnit" type="gml:CodeType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!-- ===================================================================== -->
 	<xs:element name="LandPrice" type="urg:LandPriceType" substitutionGroup="urg:_StatisticalGrid">
 		<xs:annotation>
 			<xs:appinfo>
@@ -173,21 +138,11 @@
 		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
 	</xs:complexType>
 	<!-- ===================================================================== -->
-	<xs:element name="_GenericApplicationPropertyOfLandPrice" type="xs:anyType" abstract="true">
-		<xs:annotation>
-			<xs:documentation>This element is reserved for future use.</xs:documentation>
-			<xs:appinfo>
-				<taggedValue tag="ignore">true</taggedValue>
-			</xs:appinfo>
-		</xs:annotation>
-	</xs:element>
-	<!-- ===================================================================== -->
 	<xs:element name="LandPricePerLandUse" type="urg:LandPricePerLandUseType"/>
 	<xs:complexType name="LandPricePerLandUseType">
 		<xs:sequence>
-			<xs:element name="landUse" type="gml:CodeType" minOccurs="0"/>
+			<xs:element name="landUse" type="gml:CodeType"/>
 			<xs:element name="landPrice" type="xs:integer" minOccurs="0"/>
-			<xs:element name="currencyUnit" type="gml:CodeType" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="LandPricePerLandUsePropertyType">
@@ -198,19 +153,17 @@
 	<!-- ===================================================================== -->
 	<xs:complexType name="LandUseDiversionType">
 		<xs:annotation>
-			<xs:documentation>grid cell with the number and area of land use
-				diversion</xs:documentation>
+			<xs:documentation>grid cell with the number and area of land use diversion</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="urg:StatisticalGridType">
 				<xs:sequence>
 					<xs:element name="numberOfAnnualDiversion" type="urg:NumberOfAnnualDiversionsPropertyType" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element ref="urg:_GenericApplicationPropertyOfLandUseDiversion" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="areaOfAnnualDiversion" type="urg:AreaOfAnnualDiversionsPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!-- ===================================================================== -->
 	<xs:element name="LandUseDiversion" type="urg:LandUseDiversionType" substitutionGroup="urg:_StatisticalGrid">
 		<xs:annotation>
 			<xs:appinfo>
@@ -225,26 +178,29 @@
 		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
 	</xs:complexType>
 	<!-- ===================================================================== -->
-	<xs:element name="_GenericApplicationPropertyOfLandUseDiversion" type="xs:anyType" abstract="true">
-		<xs:annotation>
-			<xs:documentation>This element is reserved for future use.</xs:documentation>
-			<xs:appinfo>
-				<taggedValue tag="ignore">true</taggedValue>
-			</xs:appinfo>
-		</xs:annotation>
-	</xs:element>
-	<!-- ===================================================================== -->
 	<xs:element name="NumberOfAnnualDiversions" type="urg:NumberOfAnnualDiversionsType"/>
 	<xs:complexType name="NumberOfAnnualDiversionsType">
 		<xs:sequence>
-			<xs:element name="year" type="xs:gYear" minOccurs="0"/>
+			<xs:element name="year" type="xs:gYear"/>
 			<xs:element name="count" type="xs:nonNegativeInteger" minOccurs="0"/>
-			<xs:element name="area" type="gml:MeasureType" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="NumberOfAnnualDiversionsPropertyType">
 		<xs:sequence>
 			<xs:element ref="urg:NumberOfAnnualDiversions"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="AreaOfAnnualDiversions" type="urg:AreaOfAnnualDiversionsType"/>
+	<xs:complexType name="AreaOfAnnualDiversionsType">
+		<xs:sequence>
+			<xs:element name="year" type="xs:gYear"/>
+			<xs:element name="area" type="gml:MeasureType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AreaOfAnnualDiversionsPropertyType">
+		<xs:sequence>
+			<xs:element ref="urg:AreaOfAnnualDiversions"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- ===================================================================== -->
@@ -259,12 +215,10 @@
 					<xs:element name="numberOfHouseholdsByOwnership" type="urg:NumberOfHouseholdsPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="numberOfHouseholdsByStructure" type="urg:NumberOfHouseholdsPropertyType" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="numberOfMainHousehold" type="xs:integer"/>
-					<xs:element ref="urg:_GenericApplicationPropertyOfHouseholds" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!-- ===================================================================== -->
 	<xs:element name="Households" type="urg:HouseholdsType" substitutionGroup="urg:_StatisticalGrid">
 		<xs:annotation>
 			<xs:appinfo>
@@ -278,15 +232,6 @@
 		</xs:sequence>
 		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
 	</xs:complexType>
-	<!-- ===================================================================== -->
-	<xs:element name="_GenericApplicationPropertyOfHouseholds" type="xs:anyType" abstract="true">
-		<xs:annotation>
-			<xs:documentation>This element is reserved for future use.</xs:documentation>
-			<xs:appinfo>
-				<taggedValue tag="ignore">true</taggedValue>
-			</xs:appinfo>
-		</xs:annotation>
-	</xs:element>
 	<!-- ===================================================================== -->
 	<xs:element name="NumberOfHouseholds" type="urg:NumberOfHouseholdsType"/>
 	<xs:complexType name="NumberOfHouseholdsType">
@@ -307,12 +252,10 @@
 				<xs:sequence>
 					<xs:element name="numberOfOffices" type="xs:nonNegativeInteger" minOccurs="0"/>
 					<xs:element name="numberOfEmployees" type="xs:nonNegativeInteger" minOccurs="0"/>
-					<xs:element ref="urg:_GenericApplicationPropertyOfOfficesAndEmployees" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!-- ===================================================================== -->
 	<xs:element name="OfficesAndEmployees" type="urg:OfficesAndEmployeesType" substitutionGroup="urg:_StatisticalGrid">
 		<xs:annotation>
 			<xs:appinfo>
@@ -327,11 +270,66 @@
 		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
 	</xs:complexType>
 	<!-- ===================================================================== -->
-	<xs:element name="_GenericApplicationPropertyOfOfficesAndEmployees" type="xs:anyType" abstract="true">
+	<xs:complexType name="GenericGridCellType">
 		<xs:annotation>
-			<xs:documentation>This element is reserved for future use.</xs:documentation>
+			<xs:documentation>grid cell for various use</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="urg:StatisticalGridType">
+				<xs:sequence>
+					<xs:element name="genericValue" type="urg:KeyValuePairPropertyType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GenericGridCell" type="urg:GenericGridCellType" substitutionGroup="urg:_StatisticalGrid">
+		<xs:annotation>
 			<xs:appinfo>
-				<taggedValue tag="ignore">true</taggedValue>
+				<taggedValue tag="topLevel">true</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GenericGridCellPropertyType">
+		<xs:sequence minOccurs="0">
+			<xs:element ref="urg:GenericGridCell"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:complexType name="KeyValuePairType">
+		<xs:sequence>
+			<xs:element name="key" type="gml:CodeType"/>
+			<xs:choice>
+				<xs:element name="stringValue" type="xs:string"/>
+				<xs:element name="intValue" type="xs:integer"/>
+				<xs:element name="doubleValue" type="xs:double"/>
+				<xs:element name="codeValue" type="gml:CodeType"/>
+				<xs:element name="measuredValue" type="gml:MeasureType"/>
+				<xs:element name="dateValue" type="xs:date"/>
+				<xs:element name="uriValue" type="xs:anyURI"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="KeyValuePair" type="urg:KeyValuePairType"/>
+	<!-- ===================================================================== -->
+	<xs:complexType name="KeyValuePairPropertyType">
+		<xs:sequence>
+			<xs:element ref="urg:KeyValuePair"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- =================== Extended attribute for CityObjectGroup ================= -->
+	<xs:element name="fiscalYearOfPublication" type="xs:gYear" substitutionGroup="grp:_GenericApplicationPropertyOfCityObjectGroup">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="maxOccurs">1</taggedValue>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="language" type="gml:CodeType" substitutionGroup="grp:_GenericApplicationPropertyOfCityObjectGroup">
+		<xs:annotation>
+			<xs:appinfo>
+				<taggedValue tag="maxOccurs">1</taggedValue>
 			</xs:appinfo>
 		</xs:annotation>
 	</xs:element>

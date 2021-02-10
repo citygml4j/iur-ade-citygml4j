@@ -22,16 +22,15 @@
 
 package org.citygml4j.ade.iur.model.urg;
 
+import org.citygml4j.ade.iur.model.common.AbstractDataType;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.builder.copy.ObjectCopier;
 import org.citygml4j.model.common.base.ModelObjects;
 import org.citygml4j.model.gml.basicTypes.Code;
-import org.citygml4j.ade.iur.model.common.AbstractDataType;
 
 public class LandPricePerLandUse extends AbstractDataType {
     private Code landUse;
     private Integer landPrice;
-    private Code currencyUnit;
 
     public Code getLandUse() {
         return landUse;
@@ -47,14 +46,6 @@ public class LandPricePerLandUse extends AbstractDataType {
 
     public void setLandPrice(Integer landPrice) {
         this.landPrice = landPrice;
-    }
-
-    public Code getCurrencyUnit() {
-        return currencyUnit;
-    }
-
-    public void setCurrencyUnit(Code currencyUnit) {
-        this.currencyUnit = ModelObjects.setParent(currencyUnit, this);
     }
 
     @Override

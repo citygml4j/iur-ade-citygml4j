@@ -22,31 +22,31 @@
 
 package org.citygml4j.ade.iur.bind.urf;
 
-import jp.go.kantei.iur._1_3.urf.AdministrationType;
-import jp.go.kantei.iur._1_3.urf.AgreementType;
-import jp.go.kantei.iur._1_3.urf.AreaClassificationType;
-import jp.go.kantei.iur._1_3.urf.CensusBlockType;
-import jp.go.kantei.iur._1_3.urf.DevelopmentProjectType;
-import jp.go.kantei.iur._1_3.urf.DisasterDamageType;
-import jp.go.kantei.iur._1_3.urf.DisasterPreventionBaseType;
-import jp.go.kantei.iur._1_3.urf.DistrictsAndZonesType;
-import jp.go.kantei.iur._1_3.urf.HubCityType;
-import jp.go.kantei.iur._1_3.urf.LandUseDiversionType;
-import jp.go.kantei.iur._1_3.urf.LandUsePlanType;
-import jp.go.kantei.iur._1_3.urf.LegalGroundsPropertyType;
-import jp.go.kantei.iur._1_3.urf.LegalGroundsType;
-import jp.go.kantei.iur._1_3.urf.NumberOfHouseholdsPropertyType;
-import jp.go.kantei.iur._1_3.urf.NumberOfHouseholdsType;
-import jp.go.kantei.iur._1_3.urf.ObjectFactory;
-import jp.go.kantei.iur._1_3.urf.PollutionType;
-import jp.go.kantei.iur._1_3.urf.PublicTransitType;
-import jp.go.kantei.iur._1_3.urf.RecreationsType;
-import jp.go.kantei.iur._1_3.urf.RegulationType;
-import jp.go.kantei.iur._1_3.urf.TargetPropertyType;
-import jp.go.kantei.iur._1_3.urf.UrbanFunctionType;
-import jp.go.kantei.iur._1_3.urf.UrbanPlanType;
-import jp.go.kantei.iur._1_3.urf.UrbanizationType;
-import jp.go.kantei.iur._1_3.urf.ZoneType;
+import jp.go.kantei.iur._1_4.urf.AdministrationType;
+import jp.go.kantei.iur._1_4.urf.AgreementType;
+import jp.go.kantei.iur._1_4.urf.AreaClassificationType;
+import jp.go.kantei.iur._1_4.urf.CensusBlockType;
+import jp.go.kantei.iur._1_4.urf.DevelopmentProjectType;
+import jp.go.kantei.iur._1_4.urf.DisasterDamageType;
+import jp.go.kantei.iur._1_4.urf.DisasterPreventionBaseType;
+import jp.go.kantei.iur._1_4.urf.DistrictsAndZonesType;
+import jp.go.kantei.iur._1_4.urf.HubCityType;
+import jp.go.kantei.iur._1_4.urf.LandUseDiversionType;
+import jp.go.kantei.iur._1_4.urf.LandUsePlanType;
+import jp.go.kantei.iur._1_4.urf.LegalGroundsPropertyType;
+import jp.go.kantei.iur._1_4.urf.LegalGroundsType;
+import jp.go.kantei.iur._1_4.urf.NumberOfHouseholdsPropertyType;
+import jp.go.kantei.iur._1_4.urf.NumberOfHouseholdsType;
+import jp.go.kantei.iur._1_4.urf.ObjectFactory;
+import jp.go.kantei.iur._1_4.urf.PollutionType;
+import jp.go.kantei.iur._1_4.urf.PublicTransportationFacilityType;
+import jp.go.kantei.iur._1_4.urf.RecreationsType;
+import jp.go.kantei.iur._1_4.urf.RegulationType;
+import jp.go.kantei.iur._1_4.urf.TargetPropertyType;
+import jp.go.kantei.iur._1_4.urf.UrbanFunctionType;
+import jp.go.kantei.iur._1_4.urf.UrbanPlanType;
+import jp.go.kantei.iur._1_4.urf.UrbanizationType;
+import jp.go.kantei.iur._1_4.urf.ZoneType;
 import net.opengis.citygml._2.AbstractCityObjectType;
 import org.citygml4j.ade.iur.bind.Marshaller;
 import org.citygml4j.ade.iur.model.urf.Administration;
@@ -57,15 +57,17 @@ import org.citygml4j.ade.iur.model.urf.DevelopmentProject;
 import org.citygml4j.ade.iur.model.urf.DisasterDamage;
 import org.citygml4j.ade.iur.model.urf.DisasterPreventionBase;
 import org.citygml4j.ade.iur.model.urf.DistrictsAndZones;
+import org.citygml4j.ade.iur.model.urf.FiscalYearOfPublicationProperty;
 import org.citygml4j.ade.iur.model.urf.HubCity;
 import org.citygml4j.ade.iur.model.urf.LandUseDiversion;
 import org.citygml4j.ade.iur.model.urf.LandUsePlan;
+import org.citygml4j.ade.iur.model.urf.LanguageProperty;
 import org.citygml4j.ade.iur.model.urf.LegalGrounds;
 import org.citygml4j.ade.iur.model.urf.LegalGroundsProperty;
 import org.citygml4j.ade.iur.model.urf.NumberOfHouseholds;
 import org.citygml4j.ade.iur.model.urf.NumberOfHouseholdsProperty;
 import org.citygml4j.ade.iur.model.urf.Pollution;
-import org.citygml4j.ade.iur.model.urf.PublicTransit;
+import org.citygml4j.ade.iur.model.urf.PublicTransportationFacility;
 import org.citygml4j.ade.iur.model.urf.Recreations;
 import org.citygml4j.ade.iur.model.urf.Regulation;
 import org.citygml4j.ade.iur.model.urf.TargetProperty;
@@ -115,11 +117,13 @@ public class UrbanFunctionMarshaller implements ADEMarshaller {
                     .with(LegalGrounds.class, this::createLegalGrounds)
                     .with(NumberOfHouseholds.class, this::createNumberOfHouseholds)
                     .with(Pollution.class, this::createPollution)
-                    .with(PublicTransit.class, this::createPublicTransit)
+                    .with(PublicTransportationFacility.class, this::createPublicTransportationFacility)
                     .with(Recreations.class, this::createRecreations)
                     .with(Regulation.class, this::createRegulation)
                     .with(Urbanization.class, this::createUrbanization)
-                    .with(UrbanPlan.class, this::createUrbanPlan);
+                    .with(UrbanPlan.class, this::createUrbanPlan)
+                    .with(FiscalYearOfPublicationProperty.class, this::createFiscalYearOfPublicationProperty)
+                    .with(LanguageProperty.class, this::createLanguageProperty);
         }
 
         return elementMapper;
@@ -143,7 +147,7 @@ public class UrbanFunctionMarshaller implements ADEMarshaller {
                     .with(NumberOfHouseholds.class, this::marshalNumberOfHouseholds)
                     .with(NumberOfHouseholdsProperty.class, this::marshalNumberOfHouseholdsProperty)
                     .with(Pollution.class, this::marshalPollution)
-                    .with(PublicTransit.class, this::marshalPublicTransit)
+                    .with(PublicTransportationFacility.class, this::marshalPublicTransportationFacility)
                     .with(Recreations.class, this::marshalRecreations)
                     .with(Regulation.class, this::marshalRegulation)
                     .with(TargetProperty.class, this::marshalTargetProperty)
@@ -221,14 +225,32 @@ public class UrbanFunctionMarshaller implements ADEMarshaller {
         if (src.getSurveyYear() != null)
             dest.setSurveyYear(marshaller.toCalendar(src.getSurveyYear()));
 
-        if (src.getArea() != null)
-            dest.setArea(helper.getGMLMarshaller().marshalMultiSurfaceProperty(src.getArea()));
+        if (src.getLod0MultiSurface() != null)
+            dest.setLod0MultiSurface(helper.getGMLMarshaller().marshalMultiSurfaceProperty(src.getLod0MultiSurface()));
 
-        if (src.getBoundary() != null)
-            dest.setBoundary(helper.getGMLMarshaller().marshalMultiCurveProperty(src.getBoundary()));
+        if (src.getLod1MultiSurface() != null)
+            dest.setLod1MultiSurface(helper.getGMLMarshaller().marshalMultiSurfaceProperty(src.getLod1MultiSurface()));
 
-        if (src.getPointLocation() != null)
-            dest.setPointLocation(helper.getGMLMarshaller().marshalMultiPointProperty(src.getPointLocation()));
+        if (src.getLod2MultiSurface() != null)
+            dest.setLod2MultiSurface(helper.getGMLMarshaller().marshalMultiSurfaceProperty(src.getLod2MultiSurface()));
+
+        if (src.getLod0MultiCurve() != null)
+            dest.setLod0MultiCurve(helper.getGMLMarshaller().marshalMultiCurveProperty(src.getLod0MultiCurve()));
+
+        if (src.getLod1MultiCurve() != null)
+            dest.setLod1MultiCurve(helper.getGMLMarshaller().marshalMultiCurveProperty(src.getLod1MultiCurve()));
+
+        if (src.getLod2MultiCurve() != null)
+            dest.setLod2MultiCurve(helper.getGMLMarshaller().marshalMultiCurveProperty(src.getLod2MultiCurve()));
+
+        if (src.getLod0MultiPoint() != null)
+            dest.setLod0MultiPoint(helper.getGMLMarshaller().marshalMultiPointProperty(src.getLod0MultiPoint()));
+
+        if (src.getLod1MultiPoint() != null)
+            dest.setLod1MultiPoint(helper.getGMLMarshaller().marshalMultiPointProperty(src.getLod1MultiPoint()));
+
+        if (src.getLod2MultiPoint() != null)
+            dest.setLod2MultiPoint(helper.getGMLMarshaller().marshalMultiPointProperty(src.getLod2MultiPoint()));
 
         for (TargetProperty property : src.getTargets())
             dest.getTarget().add(marshalTargetProperty(property));
@@ -450,8 +472,8 @@ public class UrbanFunctionMarshaller implements ADEMarshaller {
         return dest;
     }
 
-    private PublicTransitType marshalPublicTransit(PublicTransit src) {
-        PublicTransitType dest = factory.createPublicTransitType();
+    private PublicTransportationFacilityType marshalPublicTransportationFacility(PublicTransportationFacility src) {
+        PublicTransportationFacilityType dest = factory.createPublicTransportationFacilityType();
         marshalUrbanFunction(src, dest);
 
         dest.setRouteName(src.getRouteName());
@@ -490,29 +512,21 @@ public class UrbanFunctionMarshaller implements ADEMarshaller {
     public TargetPropertyType marshalTargetProperty(TargetProperty src) {
         TargetPropertyType dest = factory.createTargetPropertyType();
 
-        if (src.isSetCityObject()) {
-            JAXBElement<?> elem = helper.getJAXBMarshaller().marshalJAXBElement(src.getCityObject());
+        if (src.isSetObject()) {
+            JAXBElement<?> elem = helper.getJAXBMarshaller().marshalJAXBElement(src.getObject());
             if (elem != null && elem.getValue() instanceof AbstractCityObjectType)
                 dest.set_CityObject((JAXBElement<? extends AbstractCityObjectType>) elem);
         }
 
-        if (src.isSetRemoteSchema())
-            dest.setRemoteSchema(src.getRemoteSchema());
+        dest.setRemoteSchema(src.getRemoteSchema());
 
         if (src.isSetType())
             dest.setType(TypeType.fromValue(src.getType().getValue()));
 
-        if (src.isSetHref())
-            dest.setHref(src.getHref());
-
-        if (src.isSetRole())
-            dest.setRole(src.getRole());
-
-        if (src.isSetArcrole())
-            dest.setArcrole(src.getArcrole());
-
-        if (src.isSetTitle())
-            dest.setTitle(src.getTitle());
+        dest.setHref(src.getHref());
+        dest.setRole(src.getRole());
+        dest.setArcrole(src.getArcrole());
+        dest.setTitle(src.getTitle());
 
         if (src.isSetShow())
             dest.setShow(ShowType.fromValue(src.getShow().getValue()));
@@ -596,8 +610,8 @@ public class UrbanFunctionMarshaller implements ADEMarshaller {
         return factory.createPollution(marshalPollution(src));
     }
 
-    private JAXBElement<?> createPublicTransit(PublicTransit src) {
-        return factory.createPublicTransit(marshalPublicTransit(src));
+    private JAXBElement<?> createPublicTransportationFacility(PublicTransportationFacility src) {
+        return factory.createPublicTransportationFacility(marshalPublicTransportationFacility(src));
     }
 
     private JAXBElement<?> createRecreations(Recreations src) {
@@ -614,5 +628,17 @@ public class UrbanFunctionMarshaller implements ADEMarshaller {
 
     private JAXBElement<?> createUrbanPlan(UrbanPlan src) {
         return factory.createUrbanPlan(marshalUrbanPlan(src));
+    }
+
+    private JAXBElement<?> createFiscalYearOfPublicationProperty(FiscalYearOfPublicationProperty src) {
+        return factory.createFiscalYearOfPublication(helper.getJAXBMarshaller().getDataTypeFactory()
+                .newXMLGregorianCalendarDate(src.getValue().getValue(),
+                        DatatypeConstants.FIELD_UNDEFINED,
+                        DatatypeConstants.FIELD_UNDEFINED,
+                        DatatypeConstants.FIELD_UNDEFINED));
+    }
+
+    private JAXBElement<?> createLanguageProperty(LanguageProperty src) {
+        return factory.createLanguage(helper.getGMLMarshaller().marshalCode(src.getValue()));
     }
 }

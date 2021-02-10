@@ -40,7 +40,6 @@ public class DisasterPreventionBase extends UrbanFunction {
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         DisasterPreventionBase copy = target == null ? new DisasterPreventionBase() : (DisasterPreventionBase) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

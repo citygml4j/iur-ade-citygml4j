@@ -31,6 +31,7 @@ import java.util.List;
 
 public class LandUseDiversion extends StatisticalGrid {
     private List<NumberOfAnnualDiversionsProperty> numberOfAnnualDiversions;
+    private List<AreaOfAnnualDiversionsProperty> areaOfAnnualDiversions;
 
     public List<NumberOfAnnualDiversionsProperty> getNumberOfAnnualDiversions() {
         if (numberOfAnnualDiversions == null)
@@ -43,11 +44,21 @@ public class LandUseDiversion extends StatisticalGrid {
         this.numberOfAnnualDiversions = ModelObjects.setParent(numberOfAnnualDiversions, this);
     }
 
+    public List<AreaOfAnnualDiversionsProperty> getAreaOfAnnualDiversions() {
+        if (areaOfAnnualDiversions == null)
+            areaOfAnnualDiversions = new ChildList<>(this);
+
+        return areaOfAnnualDiversions;
+    }
+
+    public void setAreaOfAnnualDiversions(List<AreaOfAnnualDiversionsProperty> areaOfAnnualDiversions) {
+        this.areaOfAnnualDiversions = ModelObjects.setParent(areaOfAnnualDiversions, this);
+    }
+
     @Override
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         LandUseDiversion copy = target == null ? new LandUseDiversion() : (LandUseDiversion) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

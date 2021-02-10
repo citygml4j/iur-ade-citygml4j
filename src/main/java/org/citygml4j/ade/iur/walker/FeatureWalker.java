@@ -34,22 +34,39 @@ import org.citygml4j.ade.iur.model.urf.HubCity;
 import org.citygml4j.ade.iur.model.urf.LandUseDiversion;
 import org.citygml4j.ade.iur.model.urf.LandUsePlan;
 import org.citygml4j.ade.iur.model.urf.Pollution;
-import org.citygml4j.ade.iur.model.urf.PublicTransit;
+import org.citygml4j.ade.iur.model.urf.PublicTransportationFacility;
 import org.citygml4j.ade.iur.model.urf.Recreations;
 import org.citygml4j.ade.iur.model.urf.TargetProperty;
 import org.citygml4j.ade.iur.model.urf.UrbanFunction;
 import org.citygml4j.ade.iur.model.urf.UrbanPlan;
 import org.citygml4j.ade.iur.model.urf.Urbanization;
 import org.citygml4j.ade.iur.model.urf.Zone;
+import org.citygml4j.ade.iur.model.urg.GenericGridCell;
 import org.citygml4j.ade.iur.model.urg.Households;
 import org.citygml4j.ade.iur.model.urg.LandPrice;
 import org.citygml4j.ade.iur.model.urg.OfficesAndEmployees;
 import org.citygml4j.ade.iur.model.urg.Population;
-import org.citygml4j.ade.iur.model.urg.PublicTransportationAccessibility;
+import org.citygml4j.ade.iur.model.urg.PublicTransitAccessibility;
 import org.citygml4j.ade.iur.model.urg.StatisticalGrid;
+import org.citygml4j.ade.iur.model.urt.Agency;
+import org.citygml4j.ade.iur.model.urt.Attribution;
+import org.citygml4j.ade.iur.model.urt.Calendar;
+import org.citygml4j.ade.iur.model.urt.CalendarDate;
+import org.citygml4j.ade.iur.model.urt.FareAttribute;
+import org.citygml4j.ade.iur.model.urt.Level;
+import org.citygml4j.ade.iur.model.urt.Office;
+import org.citygml4j.ade.iur.model.urt.Pathway;
+import org.citygml4j.ade.iur.model.urt.PublicTransit;
+import org.citygml4j.ade.iur.model.urt.Route;
+import org.citygml4j.ade.iur.model.urt.Shape;
+import org.citygml4j.ade.iur.model.urt.Stop;
+import org.citygml4j.ade.iur.model.urt.TranslationJP;
+import org.citygml4j.ade.iur.model.urt.Trip;
 import org.citygml4j.model.citygml.ade.binding.ADEWalker;
 import org.citygml4j.model.citygml.core.AbstractCityObject;
 import org.citygml4j.model.gml.feature.FeatureProperty;
+
+import java.util.ArrayList;
 
 public class FeatureWalker implements ADEWalker<org.citygml4j.util.walker.FeatureWalker> {
     private org.citygml4j.util.walker.FeatureWalker walker;
@@ -62,7 +79,7 @@ public class FeatureWalker implements ADEWalker<org.citygml4j.util.walker.Featur
     public void visit(UrbanFunction urbanFunction) {
         walker.visit((AbstractCityObject) urbanFunction);
 
-        for (TargetProperty property : urbanFunction.getTargets())
+        for (TargetProperty property : new ArrayList<>(urbanFunction.getTargets()))
             walker.visit((FeatureProperty<?>) property);
     }
 
@@ -118,7 +135,7 @@ public class FeatureWalker implements ADEWalker<org.citygml4j.util.walker.Featur
         visit((UrbanFunction) pollution);
     }
 
-    public void visit(PublicTransit publicTransit) {
+    public void visit(PublicTransportationFacility publicTransit) {
         visit((UrbanFunction) publicTransit);
     }
 
@@ -158,7 +175,118 @@ public class FeatureWalker implements ADEWalker<org.citygml4j.util.walker.Featur
         visit((StatisticalGrid) population);
     }
 
-    public void visit(PublicTransportationAccessibility publicTransportationAccessibility) {
-        visit((StatisticalGrid) publicTransportationAccessibility);
+    public void visit(PublicTransitAccessibility publicTransitAccessibility) {
+        visit((StatisticalGrid) publicTransitAccessibility);
+    }
+
+    public void visit(GenericGridCell genericGridCell) {
+        visit((StatisticalGrid) genericGridCell);
+    }
+
+    public void visit(PublicTransit publicTransit) {
+        walker.visit((AbstractCityObject) publicTransit);
+
+        if (publicTransit.getTarget() != null)
+            walker.visit((FeatureProperty<?>) publicTransit.getTarget());
+    }
+
+    public void visit(Agency agency) {
+        visit((PublicTransit) agency);
+    }
+
+    public void visit(Attribution attribution) {
+        visit((PublicTransit) attribution);
+
+        if (attribution.getAgency() != null)
+            walker.visit((FeatureProperty<?>) attribution.getAgency());
+
+        if (attribution.getRoute() != null)
+            walker.visit((FeatureProperty<?>) attribution.getRoute());
+
+        if (attribution.getTrip() != null)
+            walker.visit((FeatureProperty<?>) attribution.getTrip());
+    }
+
+    public void visit(Calendar calendar) {
+        visit((PublicTransit) calendar);
+    }
+
+    public void visit(CalendarDate calendarDate) {
+        visit((PublicTransit) calendarDate);
+
+        if (calendarDate.getCalendar() != null)
+            walker.visit((FeatureProperty<?>) calendarDate.getCalendar());
+    }
+
+    public void visit(FareAttribute fareAttribute) {
+        visit((PublicTransit) fareAttribute);
+
+        if (fareAttribute.getAgency() != null)
+            walker.visit((FeatureProperty<?>) fareAttribute.getAgency());
+    }
+
+    public void visit(Level level) {
+        visit((PublicTransit) level);
+    }
+
+    public void visit(Office office) {
+        visit((PublicTransit) office);
+    }
+
+    public void visit(Pathway pathway) {
+        visit((PublicTransit) pathway);
+
+        if (pathway.getFrom() != null)
+            walker.visit((FeatureProperty<?>) pathway.getFrom());
+
+        if (pathway.getTo() != null)
+            walker.visit((FeatureProperty<?>) pathway.getTo());
+    }
+
+    public void visit(Route route) {
+        visit((PublicTransit) route);
+
+        if (route.getAgency() != null)
+            walker.visit((FeatureProperty<?>) route.getAgency());
+
+        if (route.getParentRoute() != null)
+            walker.visit((FeatureProperty<?>) route.getParentRoute());
+    }
+
+    public void visit(Shape shape) {
+        visit((PublicTransit) shape);
+    }
+
+    public void visit(Stop stop) {
+        visit((PublicTransit) stop);
+
+        if (stop.getParentStation() != null)
+            walker.visit((FeatureProperty<?>) stop.getParentStation());
+
+        if (stop.getLevel() != null)
+            walker.visit((FeatureProperty<?>) stop.getLevel());
+    }
+
+    public void visit(TranslationJP translationJP) {
+        visit((PublicTransit) translationJP);
+    }
+
+    public void visit(Trip trip) {
+        visit((PublicTransit) trip);
+
+        if (trip.getRoute() != null)
+            walker.visit((FeatureProperty<?>) trip.getRoute());
+
+        if (trip.getCalendar() != null)
+            walker.visit((FeatureProperty<?>) trip.getCalendar());
+
+        if (trip.getCalendarDate() != null)
+            walker.visit((FeatureProperty<?>) trip.getCalendarDate());
+
+        if (trip.getOffice() != null)
+            walker.visit((FeatureProperty<?>) trip.getOffice());
+
+        if (trip.getShape() != null)
+            walker.visit((FeatureProperty<?>) trip.getShape());
     }
 }

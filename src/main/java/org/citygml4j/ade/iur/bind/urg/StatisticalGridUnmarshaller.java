@@ -22,26 +22,39 @@
 
 package org.citygml4j.ade.iur.bind.urg;
 
-import jp.go.kantei.iur._1_3.urg.HouseholdsType;
-import jp.go.kantei.iur._1_3.urg.LandPricePerLandUsePropertyType;
-import jp.go.kantei.iur._1_3.urg.LandPricePerLandUseType;
-import jp.go.kantei.iur._1_3.urg.LandPriceType;
-import jp.go.kantei.iur._1_3.urg.LandUseDiversionType;
-import jp.go.kantei.iur._1_3.urg.NumberOfAnnualDiversionsPropertyType;
-import jp.go.kantei.iur._1_3.urg.NumberOfAnnualDiversionsType;
-import jp.go.kantei.iur._1_3.urg.NumberOfHouseholdsPropertyType;
-import jp.go.kantei.iur._1_3.urg.NumberOfHouseholdsType;
-import jp.go.kantei.iur._1_3.urg.OfficesAndEmployeesType;
-import jp.go.kantei.iur._1_3.urg.PopulationByAgeAndSexPropertyType;
-import jp.go.kantei.iur._1_3.urg.PopulationByAgeAndSexType;
-import jp.go.kantei.iur._1_3.urg.PopulationType;
-import jp.go.kantei.iur._1_3.urg.PublicTransportationAccessibilityType;
-import jp.go.kantei.iur._1_3.urg.StatisticalGridType;
+import jp.go.kantei.iur._1_4.urg.AreaOfAnnualDiversionsPropertyType;
+import jp.go.kantei.iur._1_4.urg.AreaOfAnnualDiversionsType;
+import jp.go.kantei.iur._1_4.urg.GenericGridCellType;
+import jp.go.kantei.iur._1_4.urg.HouseholdsType;
+import jp.go.kantei.iur._1_4.urg.KeyValuePairPropertyType;
+import jp.go.kantei.iur._1_4.urg.KeyValuePairType;
+import jp.go.kantei.iur._1_4.urg.LandPricePerLandUsePropertyType;
+import jp.go.kantei.iur._1_4.urg.LandPricePerLandUseType;
+import jp.go.kantei.iur._1_4.urg.LandPriceType;
+import jp.go.kantei.iur._1_4.urg.LandUseDiversionType;
+import jp.go.kantei.iur._1_4.urg.NumberOfAnnualDiversionsPropertyType;
+import jp.go.kantei.iur._1_4.urg.NumberOfAnnualDiversionsType;
+import jp.go.kantei.iur._1_4.urg.NumberOfHouseholdsPropertyType;
+import jp.go.kantei.iur._1_4.urg.NumberOfHouseholdsType;
+import jp.go.kantei.iur._1_4.urg.OfficesAndEmployeesType;
+import jp.go.kantei.iur._1_4.urg.PopulationByAgeAndSexPropertyType;
+import jp.go.kantei.iur._1_4.urg.PopulationByAgeAndSexType;
+import jp.go.kantei.iur._1_4.urg.PopulationType;
+import jp.go.kantei.iur._1_4.urg.PublicTransitAccessibilityType;
+import jp.go.kantei.iur._1_4.urg.StatisticalGridType;
+import net.opengis.gml.CodeType;
+import org.citygml4j.ade.iur.model.urg.AreaOfAnnualDiversions;
+import org.citygml4j.ade.iur.model.urg.AreaOfAnnualDiversionsProperty;
+import org.citygml4j.ade.iur.model.urg.FiscalYearOfPublicationProperty;
+import org.citygml4j.ade.iur.model.urg.GenericGridCell;
 import org.citygml4j.ade.iur.model.urg.Households;
+import org.citygml4j.ade.iur.model.urg.KeyValuePair;
+import org.citygml4j.ade.iur.model.urg.KeyValuePairProperty;
 import org.citygml4j.ade.iur.model.urg.LandPrice;
 import org.citygml4j.ade.iur.model.urg.LandPricePerLandUse;
 import org.citygml4j.ade.iur.model.urg.LandPricePerLandUseProperty;
 import org.citygml4j.ade.iur.model.urg.LandUseDiversion;
+import org.citygml4j.ade.iur.model.urg.LanguageProperty;
 import org.citygml4j.ade.iur.model.urg.NumberOfAnnualDiversions;
 import org.citygml4j.ade.iur.model.urg.NumberOfAnnualDiversionsProperty;
 import org.citygml4j.ade.iur.model.urg.NumberOfHouseholds;
@@ -50,7 +63,7 @@ import org.citygml4j.ade.iur.model.urg.OfficesAndEmployees;
 import org.citygml4j.ade.iur.model.urg.Population;
 import org.citygml4j.ade.iur.model.urg.PopulationByAgeAndSex;
 import org.citygml4j.ade.iur.model.urg.PopulationByAgeAndSexProperty;
-import org.citygml4j.ade.iur.model.urg.PublicTransportationAccessibility;
+import org.citygml4j.ade.iur.model.urg.PublicTransitAccessibility;
 import org.citygml4j.ade.iur.model.urg.StatisticalGrid;
 import org.citygml4j.builder.jaxb.unmarshal.citygml.ade.ADEUnmarshallerHelper;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
@@ -60,6 +73,7 @@ import org.citygml4j.xml.io.reader.MissingADESchemaException;
 import org.w3c.dom.Element;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDate;
 import java.time.Year;
 
@@ -77,13 +91,18 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
                     .with(LandUseDiversionType.class, this::unmarshalLandUseDiversion)
                     .with(NumberOfAnnualDiversionsType.class, this::unmarshalNumberOfAnnualDiversions)
                     .with(NumberOfAnnualDiversionsPropertyType.class, this::unmarshalNumberOfAnnualDiversionsProperty)
+                    .with(AreaOfAnnualDiversionsType.class, this::unmarshalAreaOfAnnualDiversions)
+                    .with(AreaOfAnnualDiversionsPropertyType.class, this::unmarshalAreaOfAnnualDiversionsProperty)
                     .with(NumberOfHouseholdsType.class, this::unmarshalNumberOfHouseholds)
                     .with(NumberOfHouseholdsPropertyType.class, this::unmarshalNumberOfHouseholdsProperty)
                     .with(OfficesAndEmployeesType.class, this::unmarshalOfficesAndEmployees)
                     .with(PopulationType.class, this::unmarshalPopulation)
                     .with(PopulationByAgeAndSexType.class, this::unmarshalPopulationByAgeAndSex)
                     .with(PopulationByAgeAndSexPropertyType.class, this::unmarshalPopulationByAgeAndSexProperty)
-                    .with(PublicTransportationAccessibilityType.class, this::unmarshalPublicTransportationAccessibility);
+                    .with(PublicTransitAccessibilityType.class, this::unmarshalPublicTransitAccessibility)
+                    .with(GenericGridCellType.class, this::unmarshalGenericGridCell)
+                    .with(KeyValuePairType.class, this::unmarshalKeyValuePair)
+                    .with(KeyValuePairPropertyType.class, this::unmarshalKeyValuePairProperty);
         }
 
         return typeMapper;
@@ -96,7 +115,19 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
 
     @Override
     public ADEModelObject unmarshal(JAXBElement<?> src) throws MissingADESchemaException {
-        return unmarshal(src.getValue());
+        final Object value = src.getValue();
+
+        // generic application properties
+        switch (src.getName().getLocalPart()) {
+            case "fiscalYearOfPublication":
+                LocalDate fiscalYearOfPublication = ((XMLGregorianCalendar) value).toGregorianCalendar().toZonedDateTime().toLocalDate();
+                return new FiscalYearOfPublicationProperty(Year.of(fiscalYearOfPublication.getYear()));
+            case "language":
+                return new LanguageProperty(helper.getGMLUnmarshaller().unmarshalCode((CodeType) value));
+        }
+
+        // all other types
+        return unmarshal(value);
     }
 
     @Override
@@ -135,11 +166,11 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
             dest.setSurveyYear(Year.of(date.getYear()));
         }
 
-        if (src.isSetLod1MultiSurfaceGeometry())
-            dest.setLod1MultiSurfaceGeometry(helper.getGMLUnmarshaller().unmarshalMultiSurfaceProperty(src.getLod1MultiSurfaceGeometry()));
+        if (src.isSetLod1MultiSurface())
+            dest.setLod1MultiSurface(helper.getGMLUnmarshaller().unmarshalMultiSurfaceProperty(src.getLod1MultiSurface()));
 
-        if (src.isSetLod2MultiSurfaceGeometry())
-            dest.setLod2MultiSurfaceGeometry(helper.getGMLUnmarshaller().unmarshalMultiSurfaceProperty(src.getLod2MultiSurfaceGeometry()));
+        if (src.isSetLod2MultiSurface())
+            dest.setLod2MultiSurface(helper.getGMLUnmarshaller().unmarshalMultiSurfaceProperty(src.getLod2MultiSurface()));
     }
 
     private Households unmarshalHouseholds(HouseholdsType src) throws MissingADESchemaException {
@@ -174,6 +205,9 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
                 dest.getLandPrices().add(unmarshalLandPricePerLandUseProperty(property));
         }
 
+        if (src.isSetCurrencyUnit())
+            dest.setCurrencyUnit(helper.getGMLUnmarshaller().unmarshalCode(src.getCurrencyUnit()));
+
         return dest;
     }
 
@@ -185,9 +219,6 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
 
         if (src.isSetLandPrice())
             dest.setLandPrice(src.getLandPrice().intValue());
-
-        if (src.isSetCurrencyUnit())
-            dest.setCurrencyUnit(helper.getGMLUnmarshaller().unmarshalCode(src.getCurrencyUnit()));
 
         return dest;
     }
@@ -210,6 +241,11 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
                 dest.getNumberOfAnnualDiversions().add(unmarshalNumberOfAnnualDiversionsProperty(property));
         }
 
+        if (src.isSetAreaOfAnnualDiversion()) {
+            for (AreaOfAnnualDiversionsPropertyType property : src.getAreaOfAnnualDiversion())
+                dest.getAreaOfAnnualDiversions().add(unmarshalAreaOfAnnualDiversionsProperty(property));
+        }
+
         return dest;
     }
 
@@ -224,9 +260,6 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
         if (src.isSetCount())
             dest.setCount(src.getCount().intValue());
 
-        if (src.isSetArea())
-            dest.setArea(helper.getGMLUnmarshaller().unmarshalMeasure(src.getArea()));
-
         return dest;
     }
 
@@ -235,6 +268,29 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
 
         if (src.isSetNumberOfAnnualDiversions())
             dest.setObject(unmarshalNumberOfAnnualDiversions(src.getNumberOfAnnualDiversions()));
+
+        return dest;
+    }
+
+    private AreaOfAnnualDiversions unmarshalAreaOfAnnualDiversions(AreaOfAnnualDiversionsType src) throws MissingADESchemaException {
+        AreaOfAnnualDiversions dest = new AreaOfAnnualDiversions();
+
+        if (src.isSetYear()) {
+            LocalDate date = src.getYear().toGregorianCalendar().toZonedDateTime().toLocalDate();
+            dest.setYear(Year.of(date.getYear()));
+        }
+
+        if (src.isSetArea())
+            dest.setArea(helper.getGMLUnmarshaller().unmarshalMeasure(src.getArea()));
+
+        return dest;
+    }
+
+    private AreaOfAnnualDiversionsProperty unmarshalAreaOfAnnualDiversionsProperty(AreaOfAnnualDiversionsPropertyType src) throws MissingADESchemaException {
+        AreaOfAnnualDiversionsProperty dest = new AreaOfAnnualDiversionsProperty();
+
+        if (src.isSetAreaOfAnnualDiversions())
+            dest.setObject(unmarshalAreaOfAnnualDiversions(src.getAreaOfAnnualDiversions()));
 
         return dest;
     }
@@ -323,11 +379,8 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
     private PopulationByAgeAndSex unmarshalPopulationByAgeAndSex(PopulationByAgeAndSexType src) throws MissingADESchemaException {
         PopulationByAgeAndSex dest = new PopulationByAgeAndSex();
 
-        if (src.isSetAge())
-            dest.setAge(helper.getGMLUnmarshaller().unmarshalCode(src.getAge()));
-
-        if (src.isSetSex())
-            dest.setSex(helper.getGMLUnmarshaller().unmarshalCode(src.getSex()));
+        if (src.isSetAgeAndSex())
+            dest.setAgeAndSex(helper.getGMLUnmarshaller().unmarshalCode(src.getAgeAndSex()));
 
         if (src.isSetNumber())
             dest.setNumber(src.getNumber().intValue());
@@ -344,11 +397,56 @@ public class StatisticalGridUnmarshaller implements ADEUnmarshaller {
         return dest;
     }
 
-    private PublicTransportationAccessibility unmarshalPublicTransportationAccessibility(PublicTransportationAccessibilityType src) throws MissingADESchemaException {
-        PublicTransportationAccessibility dest = new PublicTransportationAccessibility();
+    private PublicTransitAccessibility unmarshalPublicTransitAccessibility(PublicTransitAccessibilityType src) throws MissingADESchemaException {
+        PublicTransitAccessibility dest = new PublicTransitAccessibility();
         unmarshalStatisticalGrid(src, dest);
 
         dest.setAvailability(src.isAvailability());
+
+        return dest;
+    }
+
+    private GenericGridCell unmarshalGenericGridCell(GenericGridCellType src) throws MissingADESchemaException {
+        GenericGridCell dest = new GenericGridCell();
+        unmarshalStatisticalGrid(src, dest);
+
+        if (src.isSetGenericValue()) {
+            for (KeyValuePairPropertyType property : src.getGenericValue())
+                dest.getGenericValues().add(unmarshalKeyValuePairProperty(property));
+        }
+
+        return dest;
+    }
+
+    private KeyValuePair unmarshalKeyValuePair(KeyValuePairType src) throws MissingADESchemaException {
+        KeyValuePair dest = new KeyValuePair();
+
+        if (src.isSetKey())
+            dest.setKey(helper.getGMLUnmarshaller().unmarshalCode(src.getKey()));
+
+        if (src.isSetStringValue())
+            dest.setStringValue(src.getStringValue());
+        else if (src.isSetIntValue())
+            dest.setIntValue(src.getIntValue().intValue());
+        else if (src.isSetDoubleValue())
+            dest.setDoubleValue(src.getDoubleValue());
+        else if (src.isSetCodeValue())
+            dest.setCodeValue(helper.getGMLUnmarshaller().unmarshalCode(src.getCodeValue()));
+        else if (src.isSetMeasuredValue())
+            dest.setMeasuredValue(helper.getGMLUnmarshaller().unmarshalMeasure(src.getMeasuredValue()));
+        else if (src.isSetDateValue())
+            dest.setDateValue(src.getDateValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+        else if (src.isSetUriValue())
+            dest.setUriValue(src.getUriValue());
+
+        return dest;
+    }
+
+    private KeyValuePairProperty unmarshalKeyValuePairProperty(KeyValuePairPropertyType src) throws MissingADESchemaException {
+        KeyValuePairProperty dest = new KeyValuePairProperty();
+
+        if (src.isSetKeyValuePair())
+            dest.setObject(unmarshalKeyValuePair(src.getKeyValuePair()));
 
         return dest;
     }

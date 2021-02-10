@@ -22,13 +22,15 @@
 
 package org.citygml4j.ade.iur.bind.uro;
 
-import jp.go.kantei.iur._1_3.uro.BuildingDetailsPropertyType;
-import jp.go.kantei.iur._1_3.uro.BuildingDetailsType;
-import jp.go.kantei.iur._1_3.uro.LargeCustomerFacilitiesPropertyType;
-import jp.go.kantei.iur._1_3.uro.LargeCustomerFacilitiesType;
-import jp.go.kantei.iur._1_3.uro.ObjectFactory;
-import jp.go.kantei.iur._1_3.uro.TrafficVolumePropertyType;
-import jp.go.kantei.iur._1_3.uro.TrafficVolumeType;
+import jp.go.kantei.iur._1_4.uro.BuildingDetailsPropertyType;
+import jp.go.kantei.iur._1_4.uro.BuildingDetailsType;
+import jp.go.kantei.iur._1_4.uro.KeyValuePairPropertyType;
+import jp.go.kantei.iur._1_4.uro.KeyValuePairType;
+import jp.go.kantei.iur._1_4.uro.LargeCustomerFacilitiesPropertyType;
+import jp.go.kantei.iur._1_4.uro.LargeCustomerFacilitiesType;
+import jp.go.kantei.iur._1_4.uro.ObjectFactory;
+import jp.go.kantei.iur._1_4.uro.TrafficVolumePropertyType;
+import jp.go.kantei.iur._1_4.uro.TrafficVolumeType;
 import org.citygml4j.ade.iur.bind.Marshaller;
 import org.citygml4j.ade.iur.model.uro.AreaClassificationTypeProperty;
 import org.citygml4j.ade.iur.model.uro.AreaInHaProperty;
@@ -38,7 +40,10 @@ import org.citygml4j.ade.iur.model.uro.BuildingDetailsProperty;
 import org.citygml4j.ade.iur.model.uro.BuildingDetailsPropertyElement;
 import org.citygml4j.ade.iur.model.uro.CityProperty;
 import org.citygml4j.ade.iur.model.uro.DistrictsAndZonesTypeProperty;
+import org.citygml4j.ade.iur.model.uro.ExtendedAttributeProperty;
 import org.citygml4j.ade.iur.model.uro.FiscalYearOfPublicationProperty;
+import org.citygml4j.ade.iur.model.uro.KeyValuePair;
+import org.citygml4j.ade.iur.model.uro.KeyValuePairProperty;
 import org.citygml4j.ade.iur.model.uro.LandUsePlanTypeProperty;
 import org.citygml4j.ade.iur.model.uro.LanguageProperty;
 import org.citygml4j.ade.iur.model.uro.LargeCustomerFacilities;
@@ -84,6 +89,8 @@ public class UrbanObjectMarshaller implements ADEMarshaller {
                     .with(BuildingDetailsPropertyElement.class, this::createBuildingDetailsPropertyElement)
                     .with(LargeCustomerFacilities.class, this::createLargeCustomerFacilities)
                     .with(LargeCustomerFacilitiesPropertyElement.class, this::createLargeCustomerFacilitiesPropertyElement)
+                    .with(KeyValuePair.class, this::createKeyValuePair)
+                    .with(ExtendedAttributeProperty.class, this::createExtendedAttribute)
                     .with(NominalAreaProperty.class, this::createNominalAreaProperty)
                     .with(OwnerTypeProperty.class, this::createOwnerTypeProperty)
                     .with(OwnerProperty.class, this::createOwnerProperty)
@@ -116,6 +123,8 @@ public class UrbanObjectMarshaller implements ADEMarshaller {
                     .with(BuildingDetailsProperty.class, this::marshalBuildingDetailsProperty)
                     .with(LargeCustomerFacilities.class, this::marshalLargeCustomerFacilities)
                     .with(LargeCustomerFacilitiesProperty.class, this::marshalLargeCustomerFacilitiesProperty)
+                    .with(KeyValuePair.class, this::marshalKeyValuePair)
+                    .with(KeyValuePairProperty.class, this::marshalKeyValuePairProperty)
                     .with(TrafficVolume.class, this::marshalTrafficVolume)
                     .with(TrafficVolumeProperty.class, this::marshalTrafficVolumeProperty);
         }
@@ -267,6 +276,39 @@ public class UrbanObjectMarshaller implements ADEMarshaller {
         return dest;
     }
 
+    private KeyValuePairType marshalKeyValuePair(KeyValuePair src) {
+        KeyValuePairType dest = factory.createKeyValuePairType();
+
+        if (src.getKey() != null)
+            dest.setKey(helper.getGMLMarshaller().marshalCode(src.getKey()));
+
+        if (src.isSetStringValue())
+            dest.setStringValue(src.getStringValue());
+        else if (src.isSetIntValue())
+            dest.setIntValue(BigInteger.valueOf(src.getIntValue()));
+        else if (src.isSetDoubleValue())
+            dest.setDoubleValue(src.getDoubleValue());
+        else if (src.isSetCodeValue())
+            dest.setCodeValue(helper.getGMLMarshaller().marshalCode(src.getCodeValue()));
+        else if (src.isSetMeasuredValue())
+            dest.setMeasuredValue(helper.getGMLMarshaller().marshalMeasure(src.getMeasuredValue()));
+        else if (src.isSetDateValue())
+            dest.setDateValue(marshaller.toCalendar(src.getDateValue()));
+        else if (src.isSetUriValue())
+            dest.setUriValue(src.getUriValue());
+
+        return dest;
+    }
+
+    private KeyValuePairPropertyType marshalKeyValuePairProperty(KeyValuePairProperty src) {
+        KeyValuePairPropertyType dest = factory.createKeyValuePairPropertyType();
+
+        if (src.isSetObject())
+            dest.setKeyValuePair(marshalKeyValuePair(src.getObject()));
+
+        return dest;
+    }
+
     private TrafficVolumeType marshalTrafficVolume(TrafficVolume src) {
         TrafficVolumeType dest = factory.createTrafficVolumeType();
 
@@ -325,6 +367,14 @@ public class UrbanObjectMarshaller implements ADEMarshaller {
 
     private JAXBElement<?> createLargeCustomerFacilitiesPropertyElement(LargeCustomerFacilitiesPropertyElement src) {
         return factory.createLargeCustomerFacilitiesProperty(marshalLargeCustomerFacilitiesProperty(src.getValue()));
+    }
+
+    private JAXBElement<?> createKeyValuePair(KeyValuePair src) {
+        return factory.createKeyValuePair(marshalKeyValuePair(src));
+    }
+
+    private JAXBElement<?> createExtendedAttribute(ExtendedAttributeProperty src) {
+        return factory.createExtendedAttribute(marshalKeyValuePairProperty(src.getValue()));
     }
 
     private JAXBElement<?> createNominalAreaProperty(NominalAreaProperty src) {

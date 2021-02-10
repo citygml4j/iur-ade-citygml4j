@@ -4,7 +4,7 @@
   
   <jaxb:bindings schemaLocation="schemas/urbanObject.xsd" node="/xs:schema">
     <jaxb:schemaBindings>
-      <jaxb:package name="jp.go.kantei.iur._1_3.uro"/>
+      <jaxb:package name="jp.go.kantei.iur._1_4.uro"/>
     </jaxb:schemaBindings>
     <jaxb:bindings>
       <namespace:prefix name="uro"/>
@@ -22,24 +22,43 @@
   
   <jaxb:bindings schemaLocation="schemas/urbanFunction.xsd" node="/xs:schema">
     <jaxb:schemaBindings>
-      <jaxb:package name="jp.go.kantei.iur._1_3.urf"/>
+      <jaxb:package name="jp.go.kantei.iur._1_4.urf"/>
     </jaxb:schemaBindings>
     <jaxb:bindings>
       <namespace:prefix name="urf"/>
-    </jaxb:bindings>
-    <jaxb:bindings node="xs:complexType[@name='UrbanFunctionType']">
-      <jaxb:bindings node=".//xs:element[@name='location']">
-        <jaxb:property name="pointLocation"/>
-      </jaxb:bindings>
     </jaxb:bindings>
   </jaxb:bindings>
   
   <jaxb:bindings schemaLocation="schemas/statisticalGrid.xsd" node="/xs:schema">
     <jaxb:schemaBindings>
-      <jaxb:package name="jp.go.kantei.iur._1_3.urg"/>
+      <jaxb:package name="jp.go.kantei.iur._1_4.urg"/>
     </jaxb:schemaBindings>
     <jaxb:bindings>
       <namespace:prefix name="urg"/>
+    </jaxb:bindings>
+  </jaxb:bindings>
+  
+  <jaxb:bindings schemaLocation="schemas/publicTransit.xsd" node="/xs:schema">
+    <jaxb:schemaBindings>
+      <jaxb:package name="jp.go.kantei.iur._1_4.urt"/>
+    </jaxb:schemaBindings>
+    <jaxb:bindings>
+      <namespace:prefix name="urt"/>
+    </jaxb:bindings>
+    <jaxb:bindings node="//xs:complexType[@name='RouteType']">
+      <jaxb:bindings node=".//xs:element[@name='description']">
+        <jaxb:property name="routeDescription"/>
+      </jaxb:bindings>
+    </jaxb:bindings>
+    <jaxb:bindings node="//xs:complexType[@name='AgencyType']">
+      <jaxb:bindings node=".//xs:element[@name='name']">
+        <jaxb:property name="agencyName"/>
+      </jaxb:bindings>
+    </jaxb:bindings>
+    <jaxb:bindings node="//xs:complexType[@name='OfficeType']">
+      <jaxb:bindings node=".//xs:element[@name='name']">
+        <jaxb:property name="officeName"/>
+      </jaxb:bindings>
     </jaxb:bindings>
   </jaxb:bindings>
   

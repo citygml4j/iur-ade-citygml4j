@@ -77,7 +77,6 @@ public class Households extends StatisticalGrid {
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         Households copy = target == null ? new Households() : (Households) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

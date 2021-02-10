@@ -49,7 +49,6 @@ public class Urbanization extends UrbanFunction {
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         Urbanization copy = target == null ? new Urbanization() : (Urbanization) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

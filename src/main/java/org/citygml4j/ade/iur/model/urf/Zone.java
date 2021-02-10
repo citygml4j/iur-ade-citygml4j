@@ -54,7 +54,6 @@ public abstract class Zone extends UrbanFunction {
 
         Zone copy = (Zone) target;
         super.copyTo(copy, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, Zone.class, copyBuilder);
     }
 }

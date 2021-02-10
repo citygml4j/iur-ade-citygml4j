@@ -22,12 +22,12 @@
 
 package org.citygml4j.ade.iur.model.uro;
 
+import org.citygml4j.ade.iur.model.common.AbstractDataType;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.builder.copy.ObjectCopier;
 import org.citygml4j.model.common.base.ModelObjects;
 import org.citygml4j.model.gml.basicTypes.Code;
 import org.citygml4j.model.gml.basicTypes.Measure;
-import org.citygml4j.ade.iur.model.common.AbstractDataType;
 
 import java.time.LocalDate;
 import java.time.Year;

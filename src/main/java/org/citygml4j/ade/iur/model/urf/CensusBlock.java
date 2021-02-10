@@ -95,7 +95,6 @@ public class CensusBlock extends UrbanFunction {
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         CensusBlock copy = target == null ? new CensusBlock() : (CensusBlock) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

@@ -22,31 +22,22 @@
 
 package org.citygml4j.ade.iur.model.urg;
 
+import org.citygml4j.ade.iur.model.common.AbstractDataType;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.builder.copy.ObjectCopier;
 import org.citygml4j.model.common.base.ModelObjects;
 import org.citygml4j.model.gml.basicTypes.Code;
-import org.citygml4j.ade.iur.model.common.AbstractDataType;
 
 public class PopulationByAgeAndSex extends AbstractDataType {
-    private Code age;
-    private Code sex;
+    private Code ageAndSex;
     private Integer number;
 
-    public Code getAge() {
-        return age;
+    public Code getAgeAndSex() {
+        return ageAndSex;
     }
 
-    public void setAge(Code age) {
-        this.age = ModelObjects.setParent(age, this);
-    }
-
-    public Code getSex() {
-        return sex;
-    }
-
-    public void setSex(Code sex) {
-        this.sex = ModelObjects.setParent(sex, this);
+    public void setAgeAndSex(Code ageAndSex) {
+        this.ageAndSex = ModelObjects.setParent(ageAndSex, this);
     }
 
     public Integer getNumber() {

@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:uro="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/uro/1.3" xmlns:core="http://www.opengis.net/citygml/2.0" xmlns:luse="http://www.opengis.net/citygml/landuse/2.0" xmlns:bldg="http://www.opengis.net/citygml/building/2.0" xmlns:tran="http://www.opengis.net/citygml/transportation/2.0" xmlns:grp="http://www.opengis.net/citygml/cityobjectgroup/2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" targetNamespace="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/uro/1.3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3.0">
+<xs:schema xmlns:uro="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/uro/1.4" xmlns:core="http://www.opengis.net/citygml/2.0" xmlns:luse="http://www.opengis.net/citygml/landuse/2.0" xmlns:bldg="http://www.opengis.net/citygml/building/2.0" xmlns:tran="http://www.opengis.net/citygml/transportation/2.0" xmlns:grp="http://www.opengis.net/citygml/cityobjectgroup/2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" targetNamespace="http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/uro/1.4" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
 	<xs:annotation>
 		<xs:documentation>XML Schema for Urban Object module</xs:documentation>
 	</xs:annotation>
-  <xs:import namespace="http://www.opengis.net/gml" schemaLocation="../../schemas/gml/3.1.1/base/gml.xsd"/>
-  <xs:import namespace="http://www.opengis.net/citygml/2.0" schemaLocation="../../schemas/citygml/2.0.0/cityGMLBase.xsd"/>
-  <xs:import namespace="http://www.opengis.net/citygml/transportation/2.0" schemaLocation="../../schemas/citygml/2.0.0/transportation.xsd"/>
-  <xs:import namespace="http://www.opengis.net/citygml/building/2.0" schemaLocation="../../schemas/citygml/2.0.0/building.xsd"/>
-  <xs:import namespace="http://www.opengis.net/citygml/landuse/2.0" schemaLocation="../../schemas/citygml/2.0.0/landUse.xsd"/>
-  <xs:import namespace="http://www.opengis.net/citygml/cityobjectgroup/2.0" schemaLocation="../../schemas/citygml/2.0.0/cityObjectGroup.xsd"/>
-	<!-- ===================================================================== -->
-	<!-- ====================== CityGML CityFeature module  ================= -->
-	<!-- ===================================================================== -->
-	<!-- =================== Extended attribute for Building ================= -->
+	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="../../schemas/gml/3.1.1/base/gml.xsd"/>
+	<xs:import namespace="http://www.opengis.net/citygml/2.0" schemaLocation="../../schemas/citygml/2.0.0/cityGMLBase.xsd"/>
+	<xs:import namespace="http://www.opengis.net/citygml/transportation/2.0" schemaLocation="../../schemas/citygml/2.0.0/transportation.xsd"/>
+	<xs:import namespace="http://www.opengis.net/citygml/building/2.0" schemaLocation="../../schemas/citygml/2.0.0/building.xsd"/>
+	<xs:import namespace="http://www.opengis.net/citygml/landuse/2.0" schemaLocation="../../schemas/citygml/2.0.0/landUse.xsd"/>
+	<xs:import namespace="http://www.opengis.net/citygml/cityobjectgroup/2.0" schemaLocation="../../schemas/citygml/2.0.0/cityObjectGroup.xsd"/>
+	<!-- =================== Extended attribute for Building ================== -->
 	<xs:element name="buildingDetails" type="uro:BuildingDetailsPropertyType" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding">
 		<xs:annotation>
 			<xs:appinfo>
@@ -83,6 +80,31 @@
 	<xs:complexType name="LargeCustomerFacilitiesPropertyType">
 		<xs:sequence>
 			<xs:element ref="uro:LargeCustomerFacilities"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="extendedAttribute" type="uro:KeyValuePairPropertyType" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding"/>
+	<!-- ===================================================================== -->
+	<xs:complexType name="KeyValuePairType">
+		<xs:sequence>
+			<xs:element name="key" type="gml:CodeType"/>
+			<xs:choice>
+				<xs:element name="stringValue" type="xs:string"/>
+				<xs:element name="intValue" type="xs:integer"/>
+				<xs:element name="doubleValue" type="xs:double"/>
+				<xs:element name="codeValue" type="gml:CodeType"/>
+				<xs:element name="measuredValue" type="gml:MeasureType"/>
+				<xs:element name="dateValue" type="xs:date"/>
+				<xs:element name="uriValue" type="xs:anyURI"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ===================================================================== -->
+	<xs:element name="KeyValuePair" type="uro:KeyValuePairType"/>
+	<!-- ===================================================================== -->
+	<xs:complexType name="KeyValuePairPropertyType">
+		<xs:sequence>
+			<xs:element ref="uro:KeyValuePair"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- ==================== Extended attribute for Land Use =============== -->

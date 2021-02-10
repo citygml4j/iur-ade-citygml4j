@@ -49,7 +49,6 @@ public class OfficesAndEmployees extends StatisticalGrid {
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         OfficesAndEmployees copy = target == null ? new OfficesAndEmployees() : (OfficesAndEmployees) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

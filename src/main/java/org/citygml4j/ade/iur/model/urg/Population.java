@@ -155,7 +155,6 @@ public class Population extends StatisticalGrid {
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         Population copy = target == null ? new Population() : (Population) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

@@ -26,11 +26,13 @@ import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.builder.copy.ObjectCopier;
 import org.citygml4j.model.common.base.ModelObjects;
 import org.citygml4j.model.common.child.ChildList;
+import org.citygml4j.model.gml.basicTypes.Code;
 
 import java.util.List;
 
 public class LandPrice extends StatisticalGrid {
     private List<LandPricePerLandUseProperty> landPrices;
+    private Code currencyUnit;
 
     public List<LandPricePerLandUseProperty> getLandPrices() {
         if (landPrices == null)
@@ -43,11 +45,18 @@ public class LandPrice extends StatisticalGrid {
         this.landPrices = ModelObjects.setParent(landPrices, this);
     }
 
+    public Code getCurrencyUnit() {
+        return currencyUnit;
+    }
+
+    public void setCurrencyUnit(Code currencyUnit) {
+        this.currencyUnit = ModelObjects.setParent(currencyUnit, this);
+    }
+
     @Override
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         LandPrice copy = target == null ? new LandPrice() : (LandPrice) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

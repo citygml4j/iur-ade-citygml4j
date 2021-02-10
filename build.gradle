@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    api 'org.citygml4j:citygml4j:2.11.0'
+    api 'org.citygml4j:citygml4j:2.11.2'
 }
 
 javadoc {

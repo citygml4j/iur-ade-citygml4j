@@ -49,7 +49,6 @@ public class Recreations extends UrbanFunction {
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         Recreations copy = target == null ? new Recreations() : (Recreations) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

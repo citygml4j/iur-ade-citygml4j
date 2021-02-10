@@ -22,30 +22,30 @@
 
 package org.citygml4j.ade.iur.bind.urf;
 
-import jp.go.kantei.iur._1_3.urf.AdministrationType;
-import jp.go.kantei.iur._1_3.urf.AgreementType;
-import jp.go.kantei.iur._1_3.urf.AreaClassificationType;
-import jp.go.kantei.iur._1_3.urf.CensusBlockType;
-import jp.go.kantei.iur._1_3.urf.DevelopmentProjectType;
-import jp.go.kantei.iur._1_3.urf.DisasterDamageType;
-import jp.go.kantei.iur._1_3.urf.DisasterPreventionBaseType;
-import jp.go.kantei.iur._1_3.urf.DistrictsAndZonesType;
-import jp.go.kantei.iur._1_3.urf.HubCityType;
-import jp.go.kantei.iur._1_3.urf.LandUseDiversionType;
-import jp.go.kantei.iur._1_3.urf.LandUsePlanType;
-import jp.go.kantei.iur._1_3.urf.LegalGroundsPropertyType;
-import jp.go.kantei.iur._1_3.urf.LegalGroundsType;
-import jp.go.kantei.iur._1_3.urf.NumberOfHouseholdsPropertyType;
-import jp.go.kantei.iur._1_3.urf.NumberOfHouseholdsType;
-import jp.go.kantei.iur._1_3.urf.PollutionType;
-import jp.go.kantei.iur._1_3.urf.PublicTransitType;
-import jp.go.kantei.iur._1_3.urf.RecreationsType;
-import jp.go.kantei.iur._1_3.urf.RegulationType;
-import jp.go.kantei.iur._1_3.urf.TargetPropertyType;
-import jp.go.kantei.iur._1_3.urf.UrbanFunctionType;
-import jp.go.kantei.iur._1_3.urf.UrbanPlanType;
-import jp.go.kantei.iur._1_3.urf.UrbanizationType;
-import jp.go.kantei.iur._1_3.urf.ZoneType;
+import jp.go.kantei.iur._1_4.urf.AdministrationType;
+import jp.go.kantei.iur._1_4.urf.AgreementType;
+import jp.go.kantei.iur._1_4.urf.AreaClassificationType;
+import jp.go.kantei.iur._1_4.urf.CensusBlockType;
+import jp.go.kantei.iur._1_4.urf.DevelopmentProjectType;
+import jp.go.kantei.iur._1_4.urf.DisasterDamageType;
+import jp.go.kantei.iur._1_4.urf.DisasterPreventionBaseType;
+import jp.go.kantei.iur._1_4.urf.DistrictsAndZonesType;
+import jp.go.kantei.iur._1_4.urf.HubCityType;
+import jp.go.kantei.iur._1_4.urf.LandUseDiversionType;
+import jp.go.kantei.iur._1_4.urf.LandUsePlanType;
+import jp.go.kantei.iur._1_4.urf.LegalGroundsPropertyType;
+import jp.go.kantei.iur._1_4.urf.LegalGroundsType;
+import jp.go.kantei.iur._1_4.urf.NumberOfHouseholdsPropertyType;
+import jp.go.kantei.iur._1_4.urf.NumberOfHouseholdsType;
+import jp.go.kantei.iur._1_4.urf.PollutionType;
+import jp.go.kantei.iur._1_4.urf.PublicTransportationFacilityType;
+import jp.go.kantei.iur._1_4.urf.RecreationsType;
+import jp.go.kantei.iur._1_4.urf.RegulationType;
+import jp.go.kantei.iur._1_4.urf.TargetPropertyType;
+import jp.go.kantei.iur._1_4.urf.UrbanFunctionType;
+import jp.go.kantei.iur._1_4.urf.UrbanPlanType;
+import jp.go.kantei.iur._1_4.urf.UrbanizationType;
+import jp.go.kantei.iur._1_4.urf.ZoneType;
 import net.opengis.gml.CodeType;
 import org.citygml4j.ade.iur.model.urf.Administration;
 import org.citygml4j.ade.iur.model.urf.Agreement;
@@ -55,15 +55,17 @@ import org.citygml4j.ade.iur.model.urf.DevelopmentProject;
 import org.citygml4j.ade.iur.model.urf.DisasterDamage;
 import org.citygml4j.ade.iur.model.urf.DisasterPreventionBase;
 import org.citygml4j.ade.iur.model.urf.DistrictsAndZones;
+import org.citygml4j.ade.iur.model.urf.FiscalYearOfPublicationProperty;
 import org.citygml4j.ade.iur.model.urf.HubCity;
 import org.citygml4j.ade.iur.model.urf.LandUseDiversion;
 import org.citygml4j.ade.iur.model.urf.LandUsePlan;
+import org.citygml4j.ade.iur.model.urf.LanguageProperty;
 import org.citygml4j.ade.iur.model.urf.LegalGrounds;
 import org.citygml4j.ade.iur.model.urf.LegalGroundsProperty;
 import org.citygml4j.ade.iur.model.urf.NumberOfHouseholds;
 import org.citygml4j.ade.iur.model.urf.NumberOfHouseholdsProperty;
 import org.citygml4j.ade.iur.model.urf.Pollution;
-import org.citygml4j.ade.iur.model.urf.PublicTransit;
+import org.citygml4j.ade.iur.model.urf.PublicTransportationFacility;
 import org.citygml4j.ade.iur.model.urf.Recreations;
 import org.citygml4j.ade.iur.model.urf.Regulation;
 import org.citygml4j.ade.iur.model.urf.TargetProperty;
@@ -83,6 +85,7 @@ import org.citygml4j.util.mapper.CheckedTypeMapper;
 import org.citygml4j.xml.io.reader.MissingADESchemaException;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDate;
 import java.time.Year;
 
@@ -109,7 +112,7 @@ public class UrbanFunctionUnmarshaller implements ADEUnmarshaller {
                     .with(NumberOfHouseholdsType.class, this::unmarshalNumberOfHouseholds)
                     .with(NumberOfHouseholdsPropertyType.class, this::unmarshalNumberOfHouseholdsProperty)
                     .with(PollutionType.class, this::unmarshalPollution)
-                    .with(PublicTransitType.class, this::unmarshalPublicTransit)
+                    .with(PublicTransportationFacilityType.class, this::unmarshalPublicTransportationFacility)
                     .with(RecreationsType.class, this::unmarshalRecreations)
                     .with(RegulationType.class, this::unmarshalRegulation)
                     .with(UrbanizationType.class, this::unmarshalUrbanization)
@@ -127,7 +130,19 @@ public class UrbanFunctionUnmarshaller implements ADEUnmarshaller {
 
     @Override
     public ADEModelObject unmarshal(JAXBElement<?> src) throws MissingADESchemaException {
-        return unmarshal(src.getValue());
+        final Object value = src.getValue();
+
+        // generic application properties
+        switch (src.getName().getLocalPart()) {
+            case "fiscalYearOfPublication":
+                LocalDate fiscalYearOfPublication = ((XMLGregorianCalendar) value).toGregorianCalendar().toZonedDateTime().toLocalDate();
+                return new FiscalYearOfPublicationProperty(Year.of(fiscalYearOfPublication.getYear()));
+            case "language":
+                return new LanguageProperty(helper.getGMLUnmarshaller().unmarshalCode((CodeType) value));
+        }
+
+        // all other types
+        return unmarshal(value);
     }
 
     @Override
@@ -194,14 +209,32 @@ public class UrbanFunctionUnmarshaller implements ADEUnmarshaller {
             dest.setSurveyYear(Year.of(date.getYear()));
         }
 
-        if (src.isSetArea())
-            dest.setArea(helper.getGMLUnmarshaller().unmarshalMultiSurfaceProperty(src.getArea()));
+        if (src.isSetLod0MultiSurface())
+            dest.setLod0MultiSurface(helper.getGMLUnmarshaller().unmarshalMultiSurfaceProperty(src.getLod0MultiSurface()));
 
-        if (src.isSetBoundary())
-            dest.setBoundary(helper.getGMLUnmarshaller().unmarshalMultiCurveProperty(src.getBoundary()));
+        if (src.isSetLod1MultiSurface())
+            dest.setLod1MultiSurface(helper.getGMLUnmarshaller().unmarshalMultiSurfaceProperty(src.getLod1MultiSurface()));
 
-        if (src.isSetPointLocation())
-            dest.setPointLocation(helper.getGMLUnmarshaller().unmarshalMultiPointProperty(src.getPointLocation()));
+        if (src.isSetLod2MultiSurface())
+            dest.setLod2MultiSurface(helper.getGMLUnmarshaller().unmarshalMultiSurfaceProperty(src.getLod2MultiSurface()));
+
+        if (src.isSetLod0MultiCurve())
+            dest.setLod0MultiCurve(helper.getGMLUnmarshaller().unmarshalMultiCurveProperty(src.getLod0MultiCurve()));
+
+        if (src.isSetLod1MultiCurve())
+            dest.setLod1MultiCurve(helper.getGMLUnmarshaller().unmarshalMultiCurveProperty(src.getLod1MultiCurve()));
+
+        if (src.isSetLod2MultiCurve())
+            dest.setLod2MultiCurve(helper.getGMLUnmarshaller().unmarshalMultiCurveProperty(src.getLod2MultiCurve()));
+
+        if (src.isSetLod0MultiPoint())
+            dest.setLod0MultiPoint(helper.getGMLUnmarshaller().unmarshalMultiPointProperty(src.getLod0MultiPoint()));
+
+        if (src.isSetLod1MultiPoint())
+            dest.setLod1MultiPoint(helper.getGMLUnmarshaller().unmarshalMultiPointProperty(src.getLod1MultiPoint()));
+
+        if (src.isSetLod2MultiPoint())
+            dest.setLod2MultiPoint(helper.getGMLUnmarshaller().unmarshalMultiPointProperty(src.getLod2MultiPoint()));
 
         if (src.isSetTarget()) {
             for (TargetPropertyType property : src.getTarget())
@@ -423,8 +456,8 @@ public class UrbanFunctionUnmarshaller implements ADEUnmarshaller {
         return dest;
     }
 
-    private PublicTransit unmarshalPublicTransit(PublicTransitType src) throws MissingADESchemaException {
-        PublicTransit dest = new PublicTransit();
+    private PublicTransportationFacility unmarshalPublicTransportationFacility(PublicTransportationFacilityType src) throws MissingADESchemaException {
+        PublicTransportationFacility dest = new PublicTransportationFacility();
         unmarshalUrbanFunction(src, dest);
 
         dest.setRouteName(src.getRouteName());
@@ -465,26 +498,18 @@ public class UrbanFunctionUnmarshaller implements ADEUnmarshaller {
         if (src.isSet_CityObject()) {
             ModelObject object = helper.getJAXBUnmarshaller().unmarshal(src.get_CityObject());
             if (object instanceof AbstractCityObject)
-                dest.setCityObject((AbstractCityObject) object);
+                dest.setObject((AbstractCityObject) object);
         }
 
-        if (src.isSetRemoteSchema())
-            dest.setRemoteSchema(src.getRemoteSchema());
+        dest.setRemoteSchema(src.getRemoteSchema());
 
         if (src.isSetType())
             dest.setType(XLinkType.fromValue(src.getType().value()));
 
-        if (src.isSetHref())
-            dest.setHref(src.getHref());
-
-        if (src.isSetRole())
-            dest.setRole(src.getRole());
-
-        if (src.isSetArcrole())
-            dest.setArcrole(src.getArcrole());
-
-        if (src.isSetTitle())
-            dest.setTitle(src.getTitle());
+        dest.setHref(src.getHref());
+        dest.setRole(src.getRole());
+        dest.setArcrole(src.getArcrole());
+        dest.setTitle(src.getTitle());
 
         if (src.isSetShow())
             dest.setShow(XLinkShow.fromValue(src.getShow().value()));

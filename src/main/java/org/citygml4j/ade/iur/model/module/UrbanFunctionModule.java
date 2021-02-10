@@ -34,7 +34,7 @@ import org.citygml4j.ade.iur.model.urf.HubCity;
 import org.citygml4j.ade.iur.model.urf.LandUseDiversion;
 import org.citygml4j.ade.iur.model.urf.LandUsePlan;
 import org.citygml4j.ade.iur.model.urf.Pollution;
-import org.citygml4j.ade.iur.model.urf.PublicTransit;
+import org.citygml4j.ade.iur.model.urf.PublicTransportationFacility;
 import org.citygml4j.ade.iur.model.urf.Recreations;
 import org.citygml4j.ade.iur.model.urf.Regulation;
 import org.citygml4j.ade.iur.model.urf.UrbanPlan;
@@ -51,13 +51,13 @@ import java.util.List;
 import java.util.Map;
 
 public class UrbanFunctionModule extends ADEModule {
-    public static final UrbanFunctionModule v1_3 = new UrbanFunctionModule();
-    private final HashMap<String, Class<? extends AbstractFeature>> features;
+    public static final UrbanFunctionModule v1_4 = new UrbanFunctionModule();
+    private final Map<String, Class<? extends AbstractFeature>> features;
 
     private UrbanFunctionModule() {
-        super("http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urf/1.3",
+        super("http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urf/1.4",
                 "urf",
-                "http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/schemas/urf/1.3/urbanFunction.xsd",
+                "https://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/schemas/urf/1.4/urbanFunction.xsd",
                 CityGMLVersion.v2_0_0);
 
         features = new HashMap<>();
@@ -73,7 +73,7 @@ public class UrbanFunctionModule extends ADEModule {
         features.put("LandUseDiversion", LandUseDiversion.class);
         features.put("LandUsePlan", LandUsePlan.class);
         features.put("Pollution", Pollution.class);
-        features.put("PublicTransit", PublicTransit.class);
+        features.put("PublicTransportationFacility", PublicTransportationFacility.class);
         features.put("Recreations", Recreations.class);
         features.put("Regulation", Regulation.class);
         features.put("Urbanization", Urbanization.class);
@@ -87,7 +87,7 @@ public class UrbanFunctionModule extends ADEModule {
 
     @Override
     public List<String> getJAXBPackageNames() {
-        return Collections.singletonList("jp.go.kantei.iur._1_3.urf");
+        return Collections.singletonList("jp.go.kantei.iur._1_4.urf");
     }
 
     public String getModelPackageName() {

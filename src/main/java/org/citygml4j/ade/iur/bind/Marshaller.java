@@ -22,26 +22,31 @@
 
 package org.citygml4j.ade.iur.bind;
 
+import org.citygml4j.ade.iur.bind.urf.UrbanFunctionMarshaller;
+import org.citygml4j.ade.iur.bind.urg.StatisticalGridMarshaller;
+import org.citygml4j.ade.iur.bind.uro.UrbanObjectMarshaller;
+import org.citygml4j.ade.iur.bind.urt.PublicTransitMarshaller;
+import org.citygml4j.ade.iur.model.module.PublicTransitModule;
 import org.citygml4j.ade.iur.model.module.StatisticalGridModule;
 import org.citygml4j.ade.iur.model.module.UrbanFunctionModule;
 import org.citygml4j.ade.iur.model.module.UrbanObjectModule;
 import org.citygml4j.builder.jaxb.marshal.citygml.ade.ADEMarshallerHelper;
 import org.citygml4j.model.citygml.ade.binding.ADEMarshaller;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
-import org.citygml4j.ade.iur.bind.urf.UrbanFunctionMarshaller;
-import org.citygml4j.ade.iur.bind.urg.StatisticalGridMarshaller;
-import org.citygml4j.ade.iur.bind.uro.UrbanObjectMarshaller;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Year;
 
 public class Marshaller implements ADEMarshaller {
     private final UrbanFunctionMarshaller urbanFunction = new UrbanFunctionMarshaller(this);
     private final StatisticalGridMarshaller statisticalGrid = new StatisticalGridMarshaller(this);
     private final UrbanObjectMarshaller urbanObject = new UrbanObjectMarshaller(this);
+    private final PublicTransitMarshaller publicTransit = new PublicTransitMarshaller(this);
     private ADEMarshallerHelper helper;
 
     @Override
@@ -50,18 +55,21 @@ public class Marshaller implements ADEMarshaller {
         urbanFunction.setADEMarshallerHelper(helper);
         statisticalGrid.setADEMarshallerHelper(helper);
         urbanObject.setADEMarshallerHelper(helper);
+        publicTransit.setADEMarshallerHelper(helper);
     }
 
     @Override
     public JAXBElement<?> marshalJAXBElement(ADEModelObject src) {
         String packageName = src.getClass().getPackage().getName();
 
-        if (UrbanFunctionModule.v1_3.getModelPackageName().equals(packageName))
+        if (UrbanFunctionModule.v1_4.getModelPackageName().equals(packageName))
             return urbanFunction.marshalJAXBElement(src);
-        else if (StatisticalGridModule.v1_3.getModelPackageName().equals(packageName))
+        else if (StatisticalGridModule.v1_4.getModelPackageName().equals(packageName))
             return statisticalGrid.marshalJAXBElement(src);
-        else if (UrbanObjectModule.v1_3.getModelPackageName().equals(packageName))
+        else if (UrbanObjectModule.v1_4.getModelPackageName().equals(packageName))
             return urbanObject.marshalJAXBElement(src);
+        else if (PublicTransitModule.v1_4.getModelPackageName().equals(packageName))
+            return publicTransit.marshalJAXBElement(src);
 
         return null;
     }
@@ -70,12 +78,14 @@ public class Marshaller implements ADEMarshaller {
     public Object marshal(ADEModelObject src) {
         String packageName = src.getClass().getPackage().getName();
 
-        if (UrbanFunctionModule.v1_3.getModelPackageName().equals(packageName))
+        if (UrbanFunctionModule.v1_4.getModelPackageName().equals(packageName))
             return urbanFunction.marshal(src);
-        else if (StatisticalGridModule.v1_3.getModelPackageName().equals(packageName))
+        else if (StatisticalGridModule.v1_4.getModelPackageName().equals(packageName))
             return statisticalGrid.marshal(src);
-        else if (UrbanObjectModule.v1_3.getModelPackageName().equals(packageName))
+        else if (UrbanObjectModule.v1_4.getModelPackageName().equals(packageName))
             return urbanObject.marshal(src);
+        else if (PublicTransitModule.v1_4.getModelPackageName().equals(packageName))
+            return publicTransit.marshal(src);
 
         return null;
     }
@@ -86,6 +96,16 @@ public class Marshaller implements ADEMarshaller {
                         date.getYear(),
                         date.getMonthValue(),
                         date.getDayOfMonth(),
+                        DatatypeConstants.FIELD_UNDEFINED);
+    }
+
+    public XMLGregorianCalendar toCalendar(LocalTime time) {
+        return helper.getJAXBMarshaller().getDataTypeFactory()
+                .newXMLGregorianCalendarTime(
+                        time.getHour(),
+                        time.getMinute(),
+                        time.getSecond(),
+                        BigDecimal.valueOf(time.getNano(), 9).stripTrailingZeros(),
                         DatatypeConstants.FIELD_UNDEFINED);
     }
 

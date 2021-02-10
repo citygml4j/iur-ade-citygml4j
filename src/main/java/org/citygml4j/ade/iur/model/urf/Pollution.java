@@ -51,7 +51,6 @@ public class Pollution extends UrbanFunction {
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         Pollution copy = target == null ? new Pollution() : (Pollution) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

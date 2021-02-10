@@ -23,11 +23,12 @@
 package org.citygml4j.ade.iur.model.module;
 
 import org.citygml4j.ade.iur.model.urf.LandUseDiversion;
+import org.citygml4j.ade.iur.model.urg.GenericGridCell;
 import org.citygml4j.ade.iur.model.urg.Households;
 import org.citygml4j.ade.iur.model.urg.LandPrice;
 import org.citygml4j.ade.iur.model.urg.OfficesAndEmployees;
 import org.citygml4j.ade.iur.model.urg.Population;
-import org.citygml4j.ade.iur.model.urg.PublicTransportationAccessibility;
+import org.citygml4j.ade.iur.model.urg.PublicTransitAccessibility;
 import org.citygml4j.model.gml.feature.AbstractFeature;
 import org.citygml4j.model.module.ade.ADEModule;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
@@ -40,13 +41,13 @@ import java.util.List;
 import java.util.Map;
 
 public class StatisticalGridModule extends ADEModule {
-    public static final StatisticalGridModule v1_3 = new StatisticalGridModule();
-    private final HashMap<String, Class<? extends AbstractFeature>> features;
+    public static final StatisticalGridModule v1_4 = new StatisticalGridModule();
+    private final Map<String, Class<? extends AbstractFeature>> features;
 
     private StatisticalGridModule() {
-        super("http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urg/1.3",
+        super("http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/urg/1.4",
                 "urg",
-                "http://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/schemas/urg/1.3/statisticalGrid.xsd",
+                "https://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/schemas/urg/1.4/statisticalGrid.xsd",
                 CityGMLVersion.v2_0_0);
 
         features = new HashMap<>();
@@ -55,7 +56,8 @@ public class StatisticalGridModule extends ADEModule {
         features.put("LandUseDiversion", LandUseDiversion.class);
         features.put("OfficesAndEmployees", OfficesAndEmployees.class);
         features.put("Population", Population.class);
-        features.put("PublicTransportationAccessibility", PublicTransportationAccessibility.class);
+        features.put("PublicTransitAccessibility", PublicTransitAccessibility.class);
+        features.put("GenericGridCell", GenericGridCell.class);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class StatisticalGridModule extends ADEModule {
 
     @Override
     public List<String> getJAXBPackageNames() {
-        return Collections.singletonList("jp.go.kantei.iur._1_3.urg");
+        return Collections.singletonList("jp.go.kantei.iur._1_4.urg");
     }
 
     public String getModelPackageName() {

@@ -34,22 +34,46 @@ import org.citygml4j.ade.iur.model.urf.HubCity;
 import org.citygml4j.ade.iur.model.urf.LandUseDiversion;
 import org.citygml4j.ade.iur.model.urf.LandUsePlan;
 import org.citygml4j.ade.iur.model.urf.Pollution;
-import org.citygml4j.ade.iur.model.urf.PublicTransit;
+import org.citygml4j.ade.iur.model.urf.PublicTransportationFacility;
 import org.citygml4j.ade.iur.model.urf.Recreations;
 import org.citygml4j.ade.iur.model.urf.TargetProperty;
 import org.citygml4j.ade.iur.model.urf.UrbanFunction;
 import org.citygml4j.ade.iur.model.urf.UrbanPlan;
 import org.citygml4j.ade.iur.model.urf.Urbanization;
 import org.citygml4j.ade.iur.model.urf.Zone;
+import org.citygml4j.ade.iur.model.urg.GenericGridCell;
 import org.citygml4j.ade.iur.model.urg.Households;
 import org.citygml4j.ade.iur.model.urg.LandPrice;
 import org.citygml4j.ade.iur.model.urg.OfficesAndEmployees;
 import org.citygml4j.ade.iur.model.urg.Population;
-import org.citygml4j.ade.iur.model.urg.PublicTransportationAccessibility;
+import org.citygml4j.ade.iur.model.urg.PublicTransitAccessibility;
 import org.citygml4j.ade.iur.model.urg.StatisticalGrid;
+import org.citygml4j.ade.iur.model.urt.Agency;
+import org.citygml4j.ade.iur.model.urt.Attribution;
+import org.citygml4j.ade.iur.model.urt.Calendar;
+import org.citygml4j.ade.iur.model.urt.CalendarDate;
+import org.citygml4j.ade.iur.model.urt.DataTypeProperty;
+import org.citygml4j.ade.iur.model.urt.FareAttribute;
+import org.citygml4j.ade.iur.model.urt.FareRule;
+import org.citygml4j.ade.iur.model.urt.Frequency;
+import org.citygml4j.ade.iur.model.urt.Level;
+import org.citygml4j.ade.iur.model.urt.Office;
+import org.citygml4j.ade.iur.model.urt.Pathway;
+import org.citygml4j.ade.iur.model.urt.PointProperty;
+import org.citygml4j.ade.iur.model.urt.PublicTransit;
+import org.citygml4j.ade.iur.model.urt.Route;
+import org.citygml4j.ade.iur.model.urt.Shape;
+import org.citygml4j.ade.iur.model.urt.Stop;
+import org.citygml4j.ade.iur.model.urt.StopTime;
+import org.citygml4j.ade.iur.model.urt.Transfer;
+import org.citygml4j.ade.iur.model.urt.Translation;
+import org.citygml4j.ade.iur.model.urt.TranslationJP;
+import org.citygml4j.ade.iur.model.urt.Trip;
 import org.citygml4j.model.citygml.ade.binding.ADEWalker;
 import org.citygml4j.model.citygml.core.AbstractCityObject;
 import org.citygml4j.model.gml.feature.FeatureProperty;
+
+import java.util.ArrayList;
 
 public class GMLFunctionWalker<T> implements ADEWalker<org.citygml4j.util.walker.GMLFunctionWalker<T>> {
     private org.citygml4j.util.walker.GMLFunctionWalker<T> walker;
@@ -64,26 +88,62 @@ public class GMLFunctionWalker<T> implements ADEWalker<org.citygml4j.util.walker
         if (object != null)
             return object;
 
-        for (TargetProperty property : urbanFunction.getTargets()) {
+        for (TargetProperty property : new ArrayList<>(urbanFunction.getTargets())) {
             object = walker.apply((FeatureProperty<?>) property);
             if (object != null)
                 return object;
         }
 
-        if (urbanFunction.getArea() != null) {
-            object = walker.apply(urbanFunction.getArea());
+        if (urbanFunction.getLod0MultiSurface() != null) {
+            object = walker.apply(urbanFunction.getLod0MultiSurface());
             if (object != null)
                 return object;
         }
 
-        if (urbanFunction.getBoundary() != null) {
-            object = walker.apply(urbanFunction.getBoundary());
+        if (urbanFunction.getLod1MultiSurface() != null) {
+            object = walker.apply(urbanFunction.getLod1MultiSurface());
             if (object != null)
                 return object;
         }
 
-        if (urbanFunction.getPointLocation() != null)
-            return walker.apply(urbanFunction.getPointLocation());
+        if (urbanFunction.getLod2MultiSurface() != null) {
+            object = walker.apply(urbanFunction.getLod2MultiSurface());
+            if (object != null)
+                return object;
+        }
+
+        if (urbanFunction.getLod0MultiCurve() != null) {
+            object = walker.apply(urbanFunction.getLod0MultiCurve());
+            if (object != null)
+                return object;
+        }
+
+        if (urbanFunction.getLod1MultiCurve() != null) {
+            object = walker.apply(urbanFunction.getLod1MultiCurve());
+            if (object != null)
+                return object;
+        }
+
+        if (urbanFunction.getLod2MultiCurve() != null) {
+            object = walker.apply(urbanFunction.getLod2MultiCurve());
+            if (object != null)
+                return object;
+        }
+
+        if (urbanFunction.getLod0MultiPoint() != null) {
+            object = walker.apply(urbanFunction.getLod0MultiPoint());
+            if (object != null)
+                return object;
+        }
+
+        if (urbanFunction.getLod1MultiPoint() != null) {
+            object = walker.apply(urbanFunction.getLod1MultiPoint());
+            if (object != null)
+                return object;
+        }
+
+        if (urbanFunction.getLod2MultiPoint() != null)
+            return walker.apply(urbanFunction.getLod2MultiPoint());
 
         return null;
     }
@@ -140,7 +200,7 @@ public class GMLFunctionWalker<T> implements ADEWalker<org.citygml4j.util.walker
         return apply((UrbanFunction) pollution);
     }
 
-    public T apply(PublicTransit publicTransit) {
+    public T apply(PublicTransportationFacility publicTransit) {
         return apply((UrbanFunction) publicTransit);
     }
 
@@ -161,14 +221,14 @@ public class GMLFunctionWalker<T> implements ADEWalker<org.citygml4j.util.walker
         if (object != null)
             return object;
 
-        if (statisticalGrid.getLod1MultiSurfaceGeometry() != null) {
-            object = walker.apply(statisticalGrid.getLod1MultiSurfaceGeometry());
+        if (statisticalGrid.getLod1MultiSurface() != null) {
+            object = walker.apply(statisticalGrid.getLod1MultiSurface());
             if (object != null)
                 return object;
         }
 
-        if (statisticalGrid.getLod2MultiSurfaceGeometry() != null)
-            return walker.apply(statisticalGrid.getLod2MultiSurfaceGeometry());
+        if (statisticalGrid.getLod2MultiSurface() != null)
+            return walker.apply(statisticalGrid.getLod2MultiSurface());
 
         return null;
     }
@@ -193,7 +253,264 @@ public class GMLFunctionWalker<T> implements ADEWalker<org.citygml4j.util.walker
         return apply((StatisticalGrid) population);
     }
 
-    public T apply(PublicTransportationAccessibility publicTransportationAccessibility) {
-        return apply((StatisticalGrid) publicTransportationAccessibility);
+    public T apply(PublicTransitAccessibility publicTransitAccessibility) {
+        return apply((StatisticalGrid) publicTransitAccessibility);
+    }
+
+    public T apply(GenericGridCell genericGridCell) {
+        return apply((StatisticalGrid) genericGridCell);
+    }
+
+    public T apply(PublicTransit publicTransit) {
+        T object = walker.apply((AbstractCityObject) publicTransit);
+        if (object != null)
+            return object;
+
+        if (publicTransit.getTarget() != null)
+            return walker.apply((FeatureProperty<?>) publicTransit.getTarget());
+
+        return null;
+    }
+
+    public T apply(Agency agency) {
+        return apply((PublicTransit) agency);
+    }
+
+    public T apply(Attribution attribution) {
+        T object = apply((PublicTransit) attribution);
+        if (object != null)
+            return object;
+
+        if (attribution.getAgency() != null) {
+            object = walker.apply((FeatureProperty<?>) attribution.getAgency());
+            if (object != null)
+                return object;
+        }
+
+        if (attribution.getRoute() != null) {
+            object = walker.apply((FeatureProperty<?>) attribution.getRoute());
+            if (object != null)
+                return object;
+        }
+
+        if (attribution.getTrip() != null)
+            return walker.apply((FeatureProperty<?>) attribution.getTrip());
+
+        return null;
+    }
+
+    public T apply(Calendar calendar) {
+        return apply((PublicTransit) calendar);
+    }
+
+    public T apply(CalendarDate calendarDate) {
+        T object = apply((PublicTransit) calendarDate);
+        if (object != null)
+            return object;
+
+        if (calendarDate.getCalendar() != null)
+            return walker.apply((FeatureProperty<?>) calendarDate.getCalendar());
+
+        return null;
+    }
+
+    public T apply(FareAttribute fareAttribute) {
+        T object = apply((PublicTransit) fareAttribute);
+        if (object != null)
+            return object;
+
+        if (fareAttribute.getAgency() != null)
+            return walker.apply((FeatureProperty<?>) fareAttribute.getAgency());
+
+        return null;
+    }
+
+    public T apply(Level level) {
+        return apply((PublicTransit) level);
+    }
+
+    public T apply(Office office) {
+        return apply((PublicTransit) office);
+    }
+
+    public T apply(Pathway pathway) {
+        T object = apply((PublicTransit) pathway);
+        if (object != null)
+            return object;
+
+        if (pathway.getFrom() != null) {
+            object = walker.apply((FeatureProperty<?>) pathway.getFrom());
+            if (object != null)
+                return object;
+        }
+
+        if (pathway.getTo() != null)
+            return walker.apply((FeatureProperty<?>) pathway.getTo());
+
+        return null;
+    }
+
+    public T apply(Route route) {
+        T object = apply((PublicTransit) route);
+        if (object != null)
+            return object;
+
+        if (route.getAgency() != null) {
+            object = walker.apply((FeatureProperty<?>) route.getAgency());
+            if (object != null)
+                return object;
+        }
+
+        if (route.getParentRoute() != null) {
+            object = walker.apply((FeatureProperty<?>) route.getParentRoute());
+            if (object != null)
+                return object;
+        }
+
+        if (route.getLod0MultiCurve() != null)
+            return walker.apply(route.getLod0MultiCurve());
+
+        return null;
+    }
+
+    public T apply(Shape shape) {
+        T object = apply((PublicTransit) shape);
+        if (object != null)
+            return object;
+
+        for (PointProperty property : new ArrayList<>(shape.getPoints())) {
+            if (property.getObject() != null && property.getObject().getPoint() != null) {
+                object = walker.apply(property.getObject().getPoint());
+                if (object != null)
+                    return object;
+            }
+        }
+        
+        return null;
+    }
+
+    public T apply(Stop stop) {
+        T object = apply((PublicTransit) stop);
+        if (object != null)
+            return object;
+
+        if (stop.getParentStation() != null) {
+            object = walker.apply((FeatureProperty<?>) stop.getParentStation());
+            if (object != null)
+                return object;
+        }
+
+        if (stop.getLevel() != null) {
+            object = walker.apply((FeatureProperty<?>) stop.getLevel());
+            if (object != null)
+                return object;
+        }
+
+        if (stop.getPoint() != null)
+            return walker.apply(stop.getPoint());
+
+        return null;
+    }
+
+    public T apply(TranslationJP translationJP) {
+        return apply((PublicTransit) translationJP);
+    }
+
+    public T apply(Trip trip) {
+        T object = apply((PublicTransit) trip);
+        if (object != null)
+            return object;
+
+        if (trip.getRoute() != null) {
+            object = walker.apply((FeatureProperty<?>) trip.getRoute());
+            if (object != null)
+                return object;
+        }
+
+        if (trip.getCalendar() != null) {
+            object = walker.apply((FeatureProperty<?>) trip.getCalendar());
+            if (object != null)
+                return object;
+        }
+
+        if (trip.getCalendarDate() != null) {
+            object = walker.apply((FeatureProperty<?>) trip.getCalendarDate());
+            if (object != null)
+                return object;
+        }
+
+        if (trip.getOffice() != null) {
+            object = walker.apply((FeatureProperty<?>) trip.getOffice());
+            if (object != null)
+                return object;
+        }
+
+        if (trip.getShape() != null) {
+            object = walker.apply((FeatureProperty<?>) trip.getShape());
+            if (object != null)
+                return object;
+        }
+
+        if (trip.getLod0MultiCurve() != null)
+            return walker.apply(trip.getLod0MultiCurve());
+
+        return null;
+    }
+
+    public T apply(DataTypeProperty property) {
+        return property.isSetValue() ?
+                walker.apply(property.getValue()) :
+                null;
+    }
+
+    public T apply(FareRule fareRule) {
+        if (fareRule.getFare() != null) {
+            T object = walker.apply((FeatureProperty<?>) fareRule.getFare());
+            if (object != null)
+                return object;
+        }
+
+        if (fareRule.getRoute() != null)
+            return walker.apply((FeatureProperty<?>) fareRule.getRoute());
+
+        return null;
+    }
+
+    public T apply(Frequency frequency) {
+        return frequency.getTrip() != null ?
+                walker.apply((FeatureProperty<?>) frequency.getTrip()) :
+                null;
+    }
+
+    public T apply(StopTime stopTime) {
+        if (stopTime.getTrip() != null) {
+            T object = walker.apply((FeatureProperty<?>) stopTime.getTrip());
+            if (object != null)
+                return object;
+        }
+
+        if (stopTime.getStop() != null)
+            return walker.apply((FeatureProperty<?>) stopTime.getStop());
+
+        return null;
+    }
+
+    public T apply(Transfer transfer) {
+        if (transfer.getFrom() != null) {
+            T object = walker.apply((FeatureProperty<?>) transfer.getFrom());
+            if (object != null)
+                return object;
+        }
+
+        if (transfer.getTo() != null)
+            return walker.apply((FeatureProperty<?>) transfer.getTo());
+
+        return null;
+    }
+
+    public T apply(Translation translation) {
+        return translation.getRecordId() != null ?
+                walker.apply((FeatureProperty<?>) translation.getRecordId()) :
+                null;
     }
 }

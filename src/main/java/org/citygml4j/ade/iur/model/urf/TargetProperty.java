@@ -32,28 +32,12 @@ public class TargetProperty extends FeatureProperty<AbstractCityObject> implemen
     public TargetProperty() {
     }
 
-    public TargetProperty(AbstractCityObject cityObject) {
-        super(cityObject);
+    public TargetProperty(AbstractCityObject object) {
+        super(object);
     }
 
     public TargetProperty(String href) {
         super(href);
-    }
-
-    public AbstractCityObject getCityObject() {
-        return super.getObject();
-    }
-
-    public boolean isSetCityObject() {
-        return super.isSetObject();
-    }
-
-    public void setCityObject(AbstractCityObject cityObject) {
-        super.setObject(cityObject);
-    }
-
-    public void unsetCityObject() {
-        super.unsetObject();
     }
 
     @Override

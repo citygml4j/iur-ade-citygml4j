@@ -51,8 +51,8 @@ public abstract class StatisticalGrid extends AbstractCityObject implements ADEM
     private Code prefecture;
     private Code city;
     private Year surveyYear;
-    private MultiSurfaceProperty lod1MultiSurfaceGeometry;
-    private MultiSurfaceProperty lod2MultiSurfaceGeometry;
+    private MultiSurfaceProperty lod1MultiSurface;
+    private MultiSurfaceProperty lod2MultiSurface;
 
     public Code getClassifier() {
         return classifier;
@@ -113,20 +113,20 @@ public abstract class StatisticalGrid extends AbstractCityObject implements ADEM
         this.surveyYear = surveyYear;
     }
 
-    public MultiSurfaceProperty getLod1MultiSurfaceGeometry() {
-        return lod1MultiSurfaceGeometry;
+    public MultiSurfaceProperty getLod1MultiSurface() {
+        return lod1MultiSurface;
     }
 
-    public void setLod1MultiSurfaceGeometry(MultiSurfaceProperty lod1MultiSurfaceGeometry) {
-        this.lod1MultiSurfaceGeometry = ModelObjects.setParent(lod1MultiSurfaceGeometry, this);
+    public void setLod1MultiSurface(MultiSurfaceProperty lod1MultiSurface) {
+        this.lod1MultiSurface = ModelObjects.setParent(lod1MultiSurface, this);
     }
 
-    public MultiSurfaceProperty getLod2MultiSurfaceGeometry() {
-        return lod2MultiSurfaceGeometry;
+    public MultiSurfaceProperty getLod2MultiSurface() {
+        return lod2MultiSurface;
     }
 
-    public void setLod2MultiSurfaceGeometry(MultiSurfaceProperty lod2MultiSurfaceGeometry) {
-        this.lod2MultiSurfaceGeometry = ModelObjects.setParent(lod2MultiSurfaceGeometry, this);
+    public void setLod2MultiSurface(MultiSurfaceProperty lod2MultiSurface) {
+        this.lod2MultiSurface = ModelObjects.setParent(lod2MultiSurface, this);
     }
 
     @Override
@@ -137,9 +137,8 @@ public abstract class StatisticalGrid extends AbstractCityObject implements ADEM
     @Override
     public LodRepresentation getLodRepresentation() {
         LodRepresentation lodRepresentation = new LodRepresentation();
-        lodRepresentation.addRepresentation(1, lod1MultiSurfaceGeometry);
-        lodRepresentation.addRepresentation(2, lod2MultiSurfaceGeometry);
-
+        lodRepresentation.addRepresentation(lod1MultiSurface);
+        lodRepresentation.addRepresentation(lod2MultiSurface);
         return lodRepresentation;
     }
 
@@ -150,7 +149,6 @@ public abstract class StatisticalGrid extends AbstractCityObject implements ADEM
 
         StatisticalGrid copy = (StatisticalGrid) target;
         super.copyTo(copy, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, StatisticalGrid.class, copyBuilder);
     }
 

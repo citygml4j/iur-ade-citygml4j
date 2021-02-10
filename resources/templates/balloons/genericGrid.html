@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1250">
+    <style type="text/css">
+      #header{ font-size:20px;
+          font-family: Tahoma,Arial;
+	        color:#000000;
+	        font-weight:bold;
+      }
+
+      body {color:#55759b;
+         font-family: Tahoma,Arial;
+      }
+    </style>
+    <script type="text/javascript">
+      function ga_value_as_tooltip(counter, key, codeValue, dateValue, doubleValue, intValue, measuredValue, stringValue, uriValue)
+      {
+        document.write("<span title=\"");
+        if (codeValue) {
+          document.write(codeValue);
+        } else if (dateValue) {
+          document.write(dateValue);
+        } else if (doubleValue) {
+          document.write(doubleValue);
+        } else if (intValue) {
+          document.write(intValue);
+        } else if (measuredValue) {
+          document.write(measuredValue);
+        } else if (stringValue) {
+          document.write(stringValue);
+        } else if (uriValue) {
+          document.write(uriValue);
+        } else {
+          document.write("unknown");
+        }
+
+        document.write("\">" + key + "</span>");
+
+        if (counter < <3DCityDB>UR_KEYVALUEPAIR/[COUNT]KEY</3DCityDB>) {
+          document.write(", ");
+        }
+      }
+    </script>
+  <title><3DCityDB>CITYOBJECT/GMLID</3DCityDB></title>
+  </head>
+  <body>
+    <table width=492>
+      <tr><td valign=bottom><span id="header">GenericGridCell Attributes</span></td>
+          <td align=right valign=bottom><img src="http://www.3dcitydb.net/3dcitydb/fileadmin/3dcitydb/demodata/Logos/3dcitydb_logo.png"></td>
+      </tr>
+    </table>
+    <hr style="color:#000000;">
+    <table width=500>
+      <tr><td>name: <b><3DCityDB>CITYOBJECT/NAME</3DCityDB></b>,</td></tr>
+      <tr><td>description: <b><3DCityDB>CITYOBJECT/DESCRIPTION</3DCityDB></b>,</td></tr>
+      <tr><td>keyValuePairs (mouseOver for values): <b>
+        <script type="text/javascript">
+          <3DCityDB>FOREACH UR_KEYVALUEPAIR/KEY, CODEVALUE, DATEVALUE, DOUBLEVALUE, INTVALUE, MEASUREDVALUE, STRINGVALUE, URIVALUE</3DCityDB>
+          ga_value_as_tooltip("%0", "%1", "%2", "%3", "%4", "%5", "%6", "%7", "%8");
+          <3DCityDB>END FOREACH</3DCityDB>
+        </script>
+      </b>
+      </td></tr>
+	</table>
+  </body>
+</html>

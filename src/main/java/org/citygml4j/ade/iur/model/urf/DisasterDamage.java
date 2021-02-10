@@ -91,7 +91,6 @@ public class DisasterDamage extends UrbanFunction {
     public Object copyTo(Object target, CopyBuilder copyBuilder) {
         DisasterDamage copy = target == null ? new DisasterDamage() : (DisasterDamage) target;
         super.copyTo(target, copyBuilder);
-
         return ObjectCopier.copyTo(this, copy, copyBuilder);
     }
 

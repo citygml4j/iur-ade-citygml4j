@@ -22,12 +22,14 @@
 
 package org.citygml4j.ade.iur.bind.uro;
 
-import jp.go.kantei.iur._1_3.uro.BuildingDetailsPropertyType;
-import jp.go.kantei.iur._1_3.uro.BuildingDetailsType;
-import jp.go.kantei.iur._1_3.uro.LargeCustomerFacilitiesPropertyType;
-import jp.go.kantei.iur._1_3.uro.LargeCustomerFacilitiesType;
-import jp.go.kantei.iur._1_3.uro.TrafficVolumePropertyType;
-import jp.go.kantei.iur._1_3.uro.TrafficVolumeType;
+import jp.go.kantei.iur._1_4.uro.BuildingDetailsPropertyType;
+import jp.go.kantei.iur._1_4.uro.BuildingDetailsType;
+import jp.go.kantei.iur._1_4.uro.KeyValuePairPropertyType;
+import jp.go.kantei.iur._1_4.uro.KeyValuePairType;
+import jp.go.kantei.iur._1_4.uro.LargeCustomerFacilitiesPropertyType;
+import jp.go.kantei.iur._1_4.uro.LargeCustomerFacilitiesType;
+import jp.go.kantei.iur._1_4.uro.TrafficVolumePropertyType;
+import jp.go.kantei.iur._1_4.uro.TrafficVolumeType;
 import net.opengis.gml.CodeType;
 import net.opengis.gml.LengthType;
 import net.opengis.gml.MeasureType;
@@ -39,7 +41,10 @@ import org.citygml4j.ade.iur.model.uro.BuildingDetailsProperty;
 import org.citygml4j.ade.iur.model.uro.BuildingDetailsPropertyElement;
 import org.citygml4j.ade.iur.model.uro.CityProperty;
 import org.citygml4j.ade.iur.model.uro.DistrictsAndZonesTypeProperty;
+import org.citygml4j.ade.iur.model.uro.ExtendedAttributeProperty;
 import org.citygml4j.ade.iur.model.uro.FiscalYearOfPublicationProperty;
+import org.citygml4j.ade.iur.model.uro.KeyValuePair;
+import org.citygml4j.ade.iur.model.uro.KeyValuePairProperty;
 import org.citygml4j.ade.iur.model.uro.LandUsePlanTypeProperty;
 import org.citygml4j.ade.iur.model.uro.LanguageProperty;
 import org.citygml4j.ade.iur.model.uro.LargeCustomerFacilities;
@@ -80,6 +85,8 @@ public class UrbanObjectUnmarshaller implements ADEUnmarshaller {
                     .with(BuildingDetailsPropertyType.class, this::unmarshalBuildingDetailsProperty)
                     .with(LargeCustomerFacilitiesType.class, this::unmarshalLargeCustomerFacilities)
                     .with(LargeCustomerFacilitiesPropertyType.class, this::unmarshalLargeCustomerFacilitiesProperty)
+                    .with(KeyValuePairType.class, this::unmarshalKeyValuePair)
+                    .with(KeyValuePairPropertyType.class, this::unmarshalKeyValuePairProperty)
                     .with(TrafficVolumeType.class, this::unmarshalTrafficVolume)
                     .with(TrafficVolumePropertyType.class, this::unmarshalTrafficVolumeProperty);
         }
@@ -102,6 +109,8 @@ public class UrbanObjectUnmarshaller implements ADEUnmarshaller {
                 return new BuildingDetailsPropertyElement(unmarshalBuildingDetailsProperty((BuildingDetailsPropertyType) value));
             case "largeCustomerFacilities":
                 return new LargeCustomerFacilitiesPropertyElement(unmarshalLargeCustomerFacilitiesProperty((LargeCustomerFacilitiesPropertyType) value));
+            case "extendedAttribute":
+                return new ExtendedAttributeProperty(unmarshalKeyValuePairProperty((KeyValuePairPropertyType) value));
             case "nominalArea":
                 return new NominalAreaProperty(helper.getGMLUnmarshaller().unmarshalMeasure((MeasureType) value));
             case "ownerType":
@@ -281,6 +290,39 @@ public class UrbanObjectUnmarshaller implements ADEUnmarshaller {
 
         if (src.isSetLargeCustomerFacilities())
             dest.setObject(unmarshalLargeCustomerFacilities(src.getLargeCustomerFacilities()));
+
+        return dest;
+    }
+
+    private KeyValuePair unmarshalKeyValuePair(KeyValuePairType src) throws MissingADESchemaException {
+        KeyValuePair dest = new KeyValuePair();
+
+        if (src.isSetKey())
+            dest.setKey(helper.getGMLUnmarshaller().unmarshalCode(src.getKey()));
+
+        if (src.isSetStringValue())
+            dest.setStringValue(src.getStringValue());
+        else if (src.isSetIntValue())
+            dest.setIntValue(src.getIntValue().intValue());
+        else if (src.isSetDoubleValue())
+            dest.setDoubleValue(src.getDoubleValue());
+        else if (src.isSetCodeValue())
+            dest.setCodeValue(helper.getGMLUnmarshaller().unmarshalCode(src.getCodeValue()));
+        else if (src.isSetMeasuredValue())
+            dest.setMeasuredValue(helper.getGMLUnmarshaller().unmarshalMeasure(src.getMeasuredValue()));
+        else if (src.isSetDateValue())
+            dest.setDateValue(src.getDateValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+        else if (src.isSetUriValue())
+            dest.setUriValue(src.getUriValue());
+
+        return dest;
+    }
+
+    private KeyValuePairProperty unmarshalKeyValuePairProperty(KeyValuePairPropertyType src) throws MissingADESchemaException {
+        KeyValuePairProperty dest = new KeyValuePairProperty();
+
+        if (src.isSetKeyValuePair())
+            dest.setObject(unmarshalKeyValuePair(src.getKeyValuePair()));
 
         return dest;
     }
