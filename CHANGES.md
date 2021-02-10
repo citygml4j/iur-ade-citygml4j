@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+### 1.4.0
+
+##### Breaking changes
+* Updated to version 1.4 of the i-UR ADE.
+* The previous version 1.3 is not supported anymore.
+
 ### 1.0.0 - 2020-08-07
 
 This is the first release of the **i-Urban Revitalization (i-UR)** ADE module for citygml4j. This module adds support
