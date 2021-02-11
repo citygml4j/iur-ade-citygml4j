@@ -35,7 +35,7 @@ these classes to build your i-UR specific application logic.
 The latest stable release of iur-ade-citygml4j is 1.4.0.
 
 Download the latest iur-ade-citygml4j release binaries
-[here](https://github.com/citygml4j/iur-ade-citygml4j/releases/download/v1.0.0/iur-ade-citygml4j-1.4.0.zip).
+[here](https://github.com/citygml4j/iur-ade-citygml4j/releases/download/v1.4.0/iur-ade-citygml4j-1.4.0.zip).
 Previous releases are available from the [releases section](https://github.com/citygml4j/iur-ade-citygml4j/releases).
 
 ## Maven artifact
