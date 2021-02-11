@@ -3,7 +3,7 @@
 This is a citygml4j module for the **i-Urban Revitalization (i-UR)** Application Domain Extension for CityGML.
 The "i-UR" is an information infrastructure for urban revitalization and planning.
 
-This module adds support for parsing and writing i-UR ADE enriched CityGML datasets to citygml4j.
+This module adds support for parsing and writing *i-UR ADE version 1.4* enriched CityGML datasets to citygml4j.
 
 * **i-UR specification and material: https://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur**
 * **Where to file issues: https://github.com/citygml4j/iur-ade-citygml4j/issues**
@@ -32,10 +32,10 @@ defined in the package `org.citygml4j.ade.iur.model`, which extend the predefine
 these classes to build your i-UR specific application logic.
 
 ## Latest release
-The latest stable release of iur-ade-citygml4j is 1.0.0.
+The latest stable release of iur-ade-citygml4j is 1.4.0.
 
-Download the iur-ade-citygml4j 1.0.0 release binaries
-[here](https://github.com/citygml4j/iur-ade-citygml4j/releases/download/v1.0.0/iur-ade-citygml4j-1.0.0.zip).
+Download the latest iur-ade-citygml4j release binaries
+[here](https://github.com/citygml4j/iur-ade-citygml4j/releases/download/v1.0.0/iur-ade-citygml4j-1.4.0.zip).
 Previous releases are available from the [releases section](https://github.com/citygml4j/iur-ade-citygml4j/releases).
 
 ## Maven artifact
@@ -48,7 +48,7 @@ code to your `pom.xml`. You may need to adapt the iur-ade-citygml4j version numb
 <dependency>
   <groupId>org.citygml4j</groupId>
   <artifactId>iur-ade-citygml4j</artifactId>
-  <version>1.0.0</version>
+  <version>1.4.0</version>
 </dependency>
 ```
 
@@ -60,7 +60,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'org.citygml4j:iur-ade-citygml4j:1.0.0'
+  implementation 'org.citygml4j:iur-ade-citygml4j:1.4.0'
 }
 ```
 
