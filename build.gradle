@@ -9,7 +9,7 @@ plugins {
 }
 
 group 'org.citygml4j.ade'
-version '1.4.0'
+version '1.4.1'
 description 'i-Urban Revitalization ADE module for citygml4j'
 
 java {
