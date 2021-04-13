@@ -32,10 +32,10 @@ defined in the package `org.citygml4j.ade.iur.model`, which extend the predefine
 these classes to build your i-UR specific application logic.
 
 ## Latest release
-The latest stable release of iur-ade-citygml4j is 1.4.0.
+The latest stable release of iur-ade-citygml4j is 1.4.1.
 
 Download the latest iur-ade-citygml4j release binaries
-[here](https://github.com/citygml4j/iur-ade-citygml4j/releases/download/v1.4.0/iur-ade-citygml4j-1.4.0.zip).
+[here](https://github.com/citygml4j/iur-ade-citygml4j/releases/download/v1.4.1/iur-ade-citygml4j-1.4.1.zip).
 Previous releases are available from the [releases section](https://github.com/citygml4j/iur-ade-citygml4j/releases).
 
 ## Maven artifact
@@ -48,7 +48,7 @@ code to your `pom.xml`. You may need to adapt the iur-ade-citygml4j version numb
 <dependency>
   <groupId>org.citygml4j</groupId>
   <artifactId>iur-ade-citygml4j</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.1</version>
 </dependency>
 ```
 
@@ -60,7 +60,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'org.citygml4j:iur-ade-citygml4j:1.4.0'
+  implementation 'org.citygml4j:iur-ade-citygml4j:1.4.1'
 }
 ```
 

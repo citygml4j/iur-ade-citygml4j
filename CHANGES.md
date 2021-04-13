@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+### 1.4.1 - 2021-04-13
+
+##### Changes
+* Dropped usage of Bintray and JCenter.
+* Updated citygml4j to 2.11.3.
+
 ### 1.4.0 - 2021-02-11
 
 ##### Breaking changes
