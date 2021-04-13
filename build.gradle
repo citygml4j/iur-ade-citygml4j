@@ -4,7 +4,8 @@ plugins {
     id 'java-library'
     id 'distribution'
     id 'maven-publish'
-    id 'com.jfrog.bintray' version '1.8.5'
+    id 'signing'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.0.0'
 }
 
 group 'org.citygml4j.ade'
@@ -21,11 +22,11 @@ java {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    api 'org.citygml4j:citygml4j:2.11.2'
+    api 'org.citygml4j:citygml4j:2.11.3'
 }
 
 javadoc {
@@ -118,22 +119,12 @@ publishing {
     }
 }
 
-bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+signing {
+    sign publishing.publications.mavenJava
+}
 
-    publications = ['mavenJava']
-    pkg {
-        repo = 'maven'
-        name = project.name
-        desc = project.description
-        websiteUrl = 'https://github.com/citygml4j'
-        vcsUrl = 'https://github.com/citygml4j/iur-ade-citygml4j.git'
-        issueTrackerUrl = 'https://github.com/citygml4j/iur-ade-citygml4j/issues'
-        labels = ['citygml', 'java', 'ade', 'iur', 'urban', 'plannung', 'revitalization', 'citygml4j']
-        licenses = ['Apache-2.0']
-        version {
-            name = project.version
-        }
+nexusPublishing {
+    repositories {
+        sonatype()
     }
 }
