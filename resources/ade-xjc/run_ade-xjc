@@ -11,4 +11,4 @@ BINDING="binding.xjb"
 SCHEMA="UrbanRevitalizationADE.xsd"
 PLUGINS="-Xnamespace-prefix"
 
-exec ../bin/ade-xjc $PLUGINS -clean -output $OUTPUT -binding $BINDING $SCHEMA
+exec ../ade-xjc $PLUGINS -clean -output $OUTPUT -binding $BINDING $SCHEMA

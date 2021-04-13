@@ -10,4 +10,4 @@ set BINDING="binding.xjb"
 set SCHEMA="UrbanRevitalizationADE.xsd"
 set PLUGINS="-Xnamespace-prefix"
 
-call ..\bin\ade-xjc.bat %PLUGINS% -clean -output %OUTPUT% -binding %BINDING% %SCHEMA%
+call ..\ade-xjc.bat %PLUGINS% -clean -output %OUTPUT% -binding %BINDING% %SCHEMA%
