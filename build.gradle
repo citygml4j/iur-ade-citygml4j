@@ -13,7 +13,12 @@ version '1.4.1'
 description 'i-Urban Revitalization ADE module for citygml4j'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+    compileJava {
+        options.release = 8
+    }
     withJavadocJar()
     withSourcesJar()
     sourceSets {
