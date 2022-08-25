@@ -1,9 +1,16 @@
 # i-UR ADE module for citygml4j
 
 This is a citygml4j module for the **i-Urban Revitalization (i-UR)** Application Domain Extension for CityGML.
-The "i-UR" is an information infrastructure for urban revitalization and planning.
 
-This module adds support for parsing and writing *i-UR ADE version 1.4* enriched CityGML datasets to citygml4j.
+**NOTE:** The i-UR ADE module is intended to be used with [citygml4j v2](https://github.com/citygml4j/citygml4j/tree/citygml4j-v2)
+and works fine in this context. However, note that citygml4j v2 is in _maintenance mode_ and that the
+[current release](https://github.com/citygml4j/iur-ade-citygml4j/releases/latest) of the i-UR ADE module
+_cannot be used_ with the latest [citygml4j v3](https://github.com/citygml4j/citygml4j) development. There are
+currently _no plans to migrate_ the i-UR ADE module to citygml4j v3.
+
+## About the module
+The "i-UR" is an information infrastructure for urban revitalization and planning. This module adds support for
+parsing and writing *i-UR ADE version 1.4* enriched CityGML datasets to citygml4j.
 
 * **i-UR specification and material: https://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur**
 * **Where to file issues: https://github.com/citygml4j/iur-ade-citygml4j/issues**
