@@ -5,7 +5,7 @@ plugins {
     id 'distribution'
     id 'maven-publish'
     id 'signing'
-    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
+    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
 }
 
 group 'org.citygml4j.ade'
@@ -15,9 +15,6 @@ description 'i-Urban Revitalization ADE module for citygml4j'
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
-    }
-    compileJava {
-        options.release = 8
     }
     withJavadocJar()
     withSourcesJar()
@@ -31,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    api 'org.citygml4j:citygml4j:2.11.4'
+    api 'org.citygml4j:citygml4j:2.13.0'
 }
 
 javadoc {
