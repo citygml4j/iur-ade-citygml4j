@@ -39,23 +39,22 @@ defined in the package `org.citygml4j.ade.iur.model`, which extend the predefine
 these classes to build your i-UR specific application logic.
 
 ## Latest release
-The latest stable release of iur-ade-citygml4j is 1.4.2.
+The latest stable release of iur-ade-citygml4j is 1.5.0.
 
 Download the latest iur-ade-citygml4j release binaries
-[here](https://github.com/citygml4j/iur-ade-citygml4j/releases/download/v1.4.2/iur-ade-citygml4j-1.4.2.zip).
+[here](https://github.com/citygml4j/iur-ade-citygml4j/releases/download/v1.5.0/iur-ade-citygml4j-1.5.0.zip).
 Previous releases are available from the [releases section](https://github.com/citygml4j/iur-ade-citygml4j/releases).
 
 ## Maven artifact
 iur-ade-citygml4j is also available as [Maven](http://maven.apache.org/) artifact from the
-[Maven Central Repository](https://search.maven.org/search?q=iur-ade-citygml4j) and from
-[JCenter](https://bintray.com/bintray/jcenter). To add iur-ade-citygml4j to your project with Maven, add the following
+[Maven Central Repository](https://search.maven.org/search?q=iur-ade-citygml4j). To add iur-ade-citygml4j to your project with Maven, add the following
 code to your `pom.xml`. You may need to adapt the iur-ade-citygml4j version number.
 
 ```xml
 <dependency>
   <groupId>org.citygml4j</groupId>
   <artifactId>iur-ade-citygml4j</artifactId>
-  <version>1.4.2</version>
+  <version>1.5.0</version>
 </dependency>
 ```
 
@@ -67,7 +66,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'org.citygml4j:iur-ade-citygml4j:1.4.2'
+  implementation 'org.citygml4j:iur-ade-citygml4j:1.5.0'
 }
 ```
 

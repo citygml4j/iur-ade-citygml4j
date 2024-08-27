@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+### 1.5.0 - 2024-08-27
+
+##### Changes
+* **Breaking:** Java 11 is now the minimum required version for using iur-ade-citygml4j.
+* Updated citygml4j to 2.13.0.
+
 ### 1.4.2 - 2021-09-25
 
 ##### Changes
