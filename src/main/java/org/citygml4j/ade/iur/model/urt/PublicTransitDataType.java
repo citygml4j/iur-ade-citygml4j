@@ -4,7 +4,7 @@
  *
  * iur-ade-citygml4j is part of the citygml4j project
  *
- * Copyright 2019-2021 Virtual City Systems
+ * Copyright 2019-2024 Virtual City Systems
  * https://vc.systems/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
