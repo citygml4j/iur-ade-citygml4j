@@ -23,12 +23,7 @@
 package org.citygml4j.ade.iur.model.module;
 
 import org.citygml4j.ade.iur.model.urf.LandUseDiversion;
-import org.citygml4j.ade.iur.model.urg.GenericGridCell;
-import org.citygml4j.ade.iur.model.urg.Households;
-import org.citygml4j.ade.iur.model.urg.LandPrice;
-import org.citygml4j.ade.iur.model.urg.OfficesAndEmployees;
-import org.citygml4j.ade.iur.model.urg.Population;
-import org.citygml4j.ade.iur.model.urg.PublicTransitAccessibility;
+import org.citygml4j.ade.iur.model.urg.*;
 import org.citygml4j.model.gml.feature.AbstractFeature;
 import org.citygml4j.model.module.ade.ADEModule;
 import org.citygml4j.model.module.citygml.CityGMLVersion;

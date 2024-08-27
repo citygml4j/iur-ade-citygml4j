@@ -22,53 +22,11 @@
 
 package org.citygml4j.ade.iur.walker;
 
-import org.citygml4j.ade.iur.model.urf.Administration;
-import org.citygml4j.ade.iur.model.urf.Agreement;
-import org.citygml4j.ade.iur.model.urf.AreaClassification;
-import org.citygml4j.ade.iur.model.urf.CensusBlock;
-import org.citygml4j.ade.iur.model.urf.DevelopmentProject;
-import org.citygml4j.ade.iur.model.urf.DisasterDamage;
-import org.citygml4j.ade.iur.model.urf.DisasterPreventionBase;
-import org.citygml4j.ade.iur.model.urf.DistrictsAndZones;
-import org.citygml4j.ade.iur.model.urf.HubCity;
 import org.citygml4j.ade.iur.model.urf.LandUseDiversion;
-import org.citygml4j.ade.iur.model.urf.LandUsePlan;
-import org.citygml4j.ade.iur.model.urf.Pollution;
-import org.citygml4j.ade.iur.model.urf.PublicTransportationFacility;
-import org.citygml4j.ade.iur.model.urf.Recreations;
 import org.citygml4j.ade.iur.model.urf.TargetProperty;
-import org.citygml4j.ade.iur.model.urf.UrbanFunction;
-import org.citygml4j.ade.iur.model.urf.UrbanPlan;
-import org.citygml4j.ade.iur.model.urf.Urbanization;
-import org.citygml4j.ade.iur.model.urf.Zone;
-import org.citygml4j.ade.iur.model.urg.GenericGridCell;
-import org.citygml4j.ade.iur.model.urg.Households;
-import org.citygml4j.ade.iur.model.urg.LandPrice;
-import org.citygml4j.ade.iur.model.urg.OfficesAndEmployees;
-import org.citygml4j.ade.iur.model.urg.Population;
-import org.citygml4j.ade.iur.model.urg.PublicTransitAccessibility;
-import org.citygml4j.ade.iur.model.urg.StatisticalGrid;
-import org.citygml4j.ade.iur.model.urt.Agency;
-import org.citygml4j.ade.iur.model.urt.Attribution;
-import org.citygml4j.ade.iur.model.urt.Calendar;
-import org.citygml4j.ade.iur.model.urt.CalendarDate;
-import org.citygml4j.ade.iur.model.urt.DataTypeProperty;
-import org.citygml4j.ade.iur.model.urt.FareAttribute;
-import org.citygml4j.ade.iur.model.urt.FareRule;
-import org.citygml4j.ade.iur.model.urt.Frequency;
-import org.citygml4j.ade.iur.model.urt.Level;
-import org.citygml4j.ade.iur.model.urt.Office;
-import org.citygml4j.ade.iur.model.urt.Pathway;
-import org.citygml4j.ade.iur.model.urt.PointProperty;
-import org.citygml4j.ade.iur.model.urt.PublicTransit;
-import org.citygml4j.ade.iur.model.urt.Route;
-import org.citygml4j.ade.iur.model.urt.Shape;
-import org.citygml4j.ade.iur.model.urt.Stop;
-import org.citygml4j.ade.iur.model.urt.StopTime;
-import org.citygml4j.ade.iur.model.urt.Transfer;
-import org.citygml4j.ade.iur.model.urt.Translation;
-import org.citygml4j.ade.iur.model.urt.TranslationJP;
-import org.citygml4j.ade.iur.model.urt.Trip;
+import org.citygml4j.ade.iur.model.urf.*;
+import org.citygml4j.ade.iur.model.urg.*;
+import org.citygml4j.ade.iur.model.urt.*;
 import org.citygml4j.model.citygml.ade.binding.ADEWalker;
 import org.citygml4j.model.citygml.core.AbstractCityObject;
 import org.citygml4j.model.gml.feature.FeatureProperty;
@@ -385,7 +343,7 @@ public class GMLFunctionWalker<T> implements ADEWalker<org.citygml4j.util.walker
                     return object;
             }
         }
-        
+
         return null;
     }
 

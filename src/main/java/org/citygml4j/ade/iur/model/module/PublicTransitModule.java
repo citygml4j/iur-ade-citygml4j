@@ -22,31 +22,15 @@
 
 package org.citygml4j.ade.iur.model.module;
 
-import org.citygml4j.ade.iur.model.urt.Agency;
-import org.citygml4j.ade.iur.model.urt.Attribution;
 import org.citygml4j.ade.iur.model.urt.Calendar;
-import org.citygml4j.ade.iur.model.urt.CalendarDate;
-import org.citygml4j.ade.iur.model.urt.FareAttribute;
-import org.citygml4j.ade.iur.model.urt.Level;
-import org.citygml4j.ade.iur.model.urt.Office;
-import org.citygml4j.ade.iur.model.urt.Pathway;
-import org.citygml4j.ade.iur.model.urt.Route;
-import org.citygml4j.ade.iur.model.urt.Shape;
-import org.citygml4j.ade.iur.model.urt.Stop;
-import org.citygml4j.ade.iur.model.urt.TranslationJP;
-import org.citygml4j.ade.iur.model.urt.Trip;
+import org.citygml4j.ade.iur.model.urt.*;
 import org.citygml4j.model.gml.feature.AbstractFeature;
 import org.citygml4j.model.module.ade.ADEModule;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
 
 import javax.xml.namespace.QName;
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class PublicTransitModule extends ADEModule {
     public static final PublicTransitModule v1_4 = new PublicTransitModule();
@@ -93,7 +77,7 @@ public class PublicTransitModule extends ADEModule {
         featureProperties.add("stop");
         featureProperties.add("fare");
     }
-    
+
     @Override
     public URL getSchemaResource() {
         return PublicTransitModule.class.getResource("/org/citygml4j/ade/iur/schema/publicTransit.xsd");

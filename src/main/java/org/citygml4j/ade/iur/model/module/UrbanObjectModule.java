@@ -41,7 +41,7 @@ public class UrbanObjectModule extends ADEModule {
                 "https://www.kantei.go.jp/jp/singi/tiiki/toshisaisei/itoshisaisei/iur/schemas/uro/1.4/urbanObject.xsd",
                 CityGMLVersion.v2_0_0);
     }
-    
+
     @Override
     public URL getSchemaResource() {
         return UrbanObjectModule.class.getResource("/org/citygml4j/ade/iur/schema/urbanObject.xsd");

@@ -22,50 +22,9 @@
 
 package org.citygml4j.ade.iur.bind.urg;
 
-import jp.go.kantei.iur._1_4.urg.AreaOfAnnualDiversionsPropertyType;
-import jp.go.kantei.iur._1_4.urg.AreaOfAnnualDiversionsType;
-import jp.go.kantei.iur._1_4.urg.GenericGridCellType;
-import jp.go.kantei.iur._1_4.urg.HouseholdsType;
-import jp.go.kantei.iur._1_4.urg.KeyValuePairPropertyType;
-import jp.go.kantei.iur._1_4.urg.KeyValuePairType;
-import jp.go.kantei.iur._1_4.urg.LandPricePerLandUsePropertyType;
-import jp.go.kantei.iur._1_4.urg.LandPricePerLandUseType;
-import jp.go.kantei.iur._1_4.urg.LandPriceType;
-import jp.go.kantei.iur._1_4.urg.LandUseDiversionType;
-import jp.go.kantei.iur._1_4.urg.NumberOfAnnualDiversionsPropertyType;
-import jp.go.kantei.iur._1_4.urg.NumberOfAnnualDiversionsType;
-import jp.go.kantei.iur._1_4.urg.NumberOfHouseholdsPropertyType;
-import jp.go.kantei.iur._1_4.urg.NumberOfHouseholdsType;
-import jp.go.kantei.iur._1_4.urg.ObjectFactory;
-import jp.go.kantei.iur._1_4.urg.OfficesAndEmployeesType;
-import jp.go.kantei.iur._1_4.urg.PopulationByAgeAndSexPropertyType;
-import jp.go.kantei.iur._1_4.urg.PopulationByAgeAndSexType;
-import jp.go.kantei.iur._1_4.urg.PopulationType;
-import jp.go.kantei.iur._1_4.urg.PublicTransitAccessibilityType;
-import jp.go.kantei.iur._1_4.urg.StatisticalGridType;
+import jp.go.kantei.iur._1_4.urg.*;
 import org.citygml4j.ade.iur.bind.Marshaller;
-import org.citygml4j.ade.iur.model.urg.AreaOfAnnualDiversions;
-import org.citygml4j.ade.iur.model.urg.AreaOfAnnualDiversionsProperty;
-import org.citygml4j.ade.iur.model.urg.FiscalYearOfPublicationProperty;
-import org.citygml4j.ade.iur.model.urg.GenericGridCell;
-import org.citygml4j.ade.iur.model.urg.Households;
-import org.citygml4j.ade.iur.model.urg.KeyValuePair;
-import org.citygml4j.ade.iur.model.urg.KeyValuePairProperty;
-import org.citygml4j.ade.iur.model.urg.LandPrice;
-import org.citygml4j.ade.iur.model.urg.LandPricePerLandUse;
-import org.citygml4j.ade.iur.model.urg.LandPricePerLandUseProperty;
-import org.citygml4j.ade.iur.model.urg.LandUseDiversion;
-import org.citygml4j.ade.iur.model.urg.LanguageProperty;
-import org.citygml4j.ade.iur.model.urg.NumberOfAnnualDiversions;
-import org.citygml4j.ade.iur.model.urg.NumberOfAnnualDiversionsProperty;
-import org.citygml4j.ade.iur.model.urg.NumberOfHouseholds;
-import org.citygml4j.ade.iur.model.urg.NumberOfHouseholdsProperty;
-import org.citygml4j.ade.iur.model.urg.OfficesAndEmployees;
-import org.citygml4j.ade.iur.model.urg.Population;
-import org.citygml4j.ade.iur.model.urg.PopulationByAgeAndSex;
-import org.citygml4j.ade.iur.model.urg.PopulationByAgeAndSexProperty;
-import org.citygml4j.ade.iur.model.urg.PublicTransitAccessibility;
-import org.citygml4j.ade.iur.model.urg.StatisticalGrid;
+import org.citygml4j.ade.iur.model.urg.*;
 import org.citygml4j.builder.jaxb.marshal.citygml.ade.ADEMarshallerHelper;
 import org.citygml4j.model.citygml.ade.binding.ADEMarshaller;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
@@ -104,7 +63,8 @@ public class StatisticalGridMarshaller implements ADEMarshaller {
                     .with(GenericGridCell.class, this::createGenericGridCell)
                     .with(KeyValuePair.class, this::createKeyValuePair)
                     .with(FiscalYearOfPublicationProperty.class, this::createFiscalYearOfPublicationProperty)
-                    .with(LanguageProperty.class, this::createLanguageProperty);;
+                    .with(LanguageProperty.class, this::createLanguageProperty);
+            ;
         }
 
         return elementMapper;

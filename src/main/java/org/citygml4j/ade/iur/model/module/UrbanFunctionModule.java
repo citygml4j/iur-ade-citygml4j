@@ -22,23 +22,7 @@
 
 package org.citygml4j.ade.iur.model.module;
 
-import org.citygml4j.ade.iur.model.urf.Administration;
-import org.citygml4j.ade.iur.model.urf.Agreement;
-import org.citygml4j.ade.iur.model.urf.AreaClassification;
-import org.citygml4j.ade.iur.model.urf.CensusBlock;
-import org.citygml4j.ade.iur.model.urf.DevelopmentProject;
-import org.citygml4j.ade.iur.model.urf.DisasterDamage;
-import org.citygml4j.ade.iur.model.urf.DisasterPreventionBase;
-import org.citygml4j.ade.iur.model.urf.DistrictsAndZones;
-import org.citygml4j.ade.iur.model.urf.HubCity;
-import org.citygml4j.ade.iur.model.urf.LandUseDiversion;
-import org.citygml4j.ade.iur.model.urf.LandUsePlan;
-import org.citygml4j.ade.iur.model.urf.Pollution;
-import org.citygml4j.ade.iur.model.urf.PublicTransportationFacility;
-import org.citygml4j.ade.iur.model.urf.Recreations;
-import org.citygml4j.ade.iur.model.urf.Regulation;
-import org.citygml4j.ade.iur.model.urf.UrbanPlan;
-import org.citygml4j.ade.iur.model.urf.Urbanization;
+import org.citygml4j.ade.iur.model.urf.*;
 import org.citygml4j.model.gml.feature.AbstractFeature;
 import org.citygml4j.model.module.ade.ADEModule;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
@@ -79,7 +63,7 @@ public class UrbanFunctionModule extends ADEModule {
         features.put("Urbanization", Urbanization.class);
         features.put("UrbanPlan", UrbanPlan.class);
     }
-    
+
     @Override
     public URL getSchemaResource() {
         return UrbanFunctionModule.class.getResource("/org/citygml4j/ade/iur/schema/urbanFunction.xsd");
